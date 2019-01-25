@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/HoloPlay/example scene.unity
-  isLoaded: 1
-  isActive: 1
