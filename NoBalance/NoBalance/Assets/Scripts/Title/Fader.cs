@@ -12,7 +12,7 @@ public class Fader : MonoBehaviour
 	private static Image fadeImage;
 
 	//フェード用Imageの透明度
-	private static float alpha = 0.0f;
+	private static float alpha = 1.0f;
 
 	//フェードインアウトのフラグ
 	public static bool isFadeIn = false;
@@ -42,7 +42,6 @@ public class Fader : MonoBehaviour
 		fadeImage.transform.SetParent(fadeCanvas.transform, false);
 		fadeImage.rectTransform.anchoredPosition = Vector3.zero;
 
-		//Imageのサイズは適当に設定してください
 		fadeImage.rectTransform.sizeDelta = new Vector2(900, 500);
 	}
 
