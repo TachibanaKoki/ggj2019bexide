@@ -90,13 +90,13 @@ public class GameManager : MonoBehaviour
 			if (clear)
 			{
 				_gameOverDemoTimer = 20.0f;
-				// ���ɖ炷BGM�̐ݒ�
+				// クリア時に鳴らすBGM
 				m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();
 			}
 			else
 			{
 				_gameOverDemoTimer = 35.0f;
-				// ���ɖ炷BGM�̐ݒ�
+				// ゲームオーバー時に鳴らすBGM
 				m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
 			}
 			m_BGM.Play();
