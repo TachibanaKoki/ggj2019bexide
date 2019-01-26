@@ -21,7 +21,7 @@ public class ResultManager : MonoBehaviour
 	{
 		m_titleImage = transform.Find("Image").GetComponent<Image>();
 		m_scoreText = transform.Find("Score").GetComponent<Text>();
-		m_HiscoreText = transform.Find("Hiscore").GetComponent<Text>();
+		m_HiscoreText = transform.Find("HiScore").GetComponent<Text>();
 
 		m_score = 0;
 
