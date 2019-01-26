@@ -125,12 +125,16 @@ public class StackOrder : MonoBehaviour,IGetStack
         {
             if (_leftOrderTypes.Count <= 0) return;
             GameObject.Destroy(_leftOrderTypes.Dequeue()._gameObject);
+			var seObj = GameObject.Find("SE").GetComponent<AudioSource>();
+			seObj.Play();
         }
         else
         {
             if (_rightOrderTypes.Count <= 0) return;
             GameObject.Destroy(_rightOrderTypes.Dequeue()._gameObject);
-        }
+			var seObj = GameObject.Find("SE").GetComponent<AudioSource>();
+			seObj.Play();
+		}
     }
 
     public void OrderInstance(OrderType orderType,bool isLeft,float Offset = 0)

@@ -13,6 +13,7 @@ public class TitleManager : MonoBehaviour
 	private float m_colorTimer;
 
 
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -52,7 +53,7 @@ public class TitleManager : MonoBehaviour
 		}
 
 		// タッチチェック
-		if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("A Button"))
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			Fader.FadeOut(1);
 		}
