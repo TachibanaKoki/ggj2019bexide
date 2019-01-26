@@ -8,18 +8,10 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     public UnityAction<bool> MissEvent { get; set; }
 
-    public void MissPenalty(bool isLeft)
-    {
-        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, -2.0f);
-        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, -1.0f);
-        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, 0.0f);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        _orderStack = GetComponent<IGetStack>();
-        MissEvent += this.MissPenalty;
+        _orderStack = transform.parent.Find("SpawnManager").gameObject.GetComponent<IGetStack>();
     }
 
     // Update is called once per frame

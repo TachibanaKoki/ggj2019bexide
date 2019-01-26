@@ -21,6 +21,8 @@ public class TitleManager : MonoBehaviour
 
 		// プラットフォームに合わせてケースわけ？（できるのであれば
 		m_touchText.text = "Tap to Start";
+
+		Fader.FadeIn();
     }
 
     // Update is called once per frame
