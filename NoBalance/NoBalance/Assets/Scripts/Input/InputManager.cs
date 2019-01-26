@@ -32,7 +32,10 @@ public class InputManager : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("right1")
                     || Input.GetButtonDown("up1")
-                    || Input.GetButtonDown("down1"))
+                    || Input.GetButtonDown("down1")
+                    || ViveInput.GetDownRight1()
+                    || ViveInput.GetDownUp1()
+                    || ViveInput.GetDownDown1())
                 {
                     MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Left Miss");
@@ -46,7 +49,10 @@ public class InputManager : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("left1")
                     || Input.GetButtonDown("up1")
-                    || Input.GetButtonDown("down1"))
+                    || Input.GetButtonDown("down1")
+                    || ViveInput.GetDownLeft1()
+                    || ViveInput.GetDownUp1()
+                    || ViveInput.GetDownDown1())
                 {
                     MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Right Miss");
@@ -60,7 +66,10 @@ public class InputManager : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("left1")
                     || Input.GetButtonDown("right1")
-                    || Input.GetButtonDown("down1"))
+                    || Input.GetButtonDown("down1")
+                    || ViveInput.GetDownLeft1()
+                    || ViveInput.GetDownRight1()
+                    || ViveInput.GetDownDown1())
                 {
                     MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Up Miss");
@@ -74,7 +83,10 @@ public class InputManager : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("left1")
                     || Input.GetButtonDown("right1")
-                    || Input.GetButtonDown("up1"))
+                    || Input.GetButtonDown("up1")
+                     || ViveInput.GetDownLeft1()
+                    || ViveInput.GetDownRight1()
+                    || ViveInput.GetDownUp1())
                 {
                     MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Down Miss");
@@ -94,7 +106,10 @@ public class InputManager : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("right2")
                     || Input.GetButtonDown("up2")
-                    || Input.GetButtonDown("down2"))
+                    || Input.GetButtonDown("down2")
+                    || ViveInput.GetDownUp2()
+                    || ViveInput.GetDownRight2()
+                    || ViveInput.GetDownDown2())
                 {
                     MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Left Miss");
@@ -108,7 +123,10 @@ public class InputManager : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("left2")
                     || Input.GetButtonDown("up2")
-                    || Input.GetButtonDown("down2"))
+                    || Input.GetButtonDown("down2")
+                    || ViveInput.GetDownLeft2()
+                    || ViveInput.GetDownUp2()
+                    || ViveInput.GetDownDown2())
                 {
                     MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Right Miss");
@@ -122,7 +140,10 @@ public class InputManager : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("left2")
                     || Input.GetButtonDown("right2")
-                    || Input.GetButtonDown("down2"))
+                    || Input.GetButtonDown("down2")
+                    || ViveInput.GetDownLeft2()
+                    || ViveInput.GetDownRight2()
+                    || ViveInput.GetDownDown2())
                 {
                     MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Up Miss");
@@ -136,7 +157,10 @@ public class InputManager : MonoBehaviour
                 }
                 else if (Input.GetButtonDown("left2")
                     || Input.GetButtonDown("right2")
-                    || Input.GetButtonDown("up2"))
+                    || Input.GetButtonDown("up2")
+                    || ViveInput.GetDownLeft2()
+                    || ViveInput.GetDownRight2()
+                    || ViveInput.GetDownDown2())
                 {
                     MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Down Miss");
