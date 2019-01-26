@@ -107,7 +107,7 @@ public class StackOrder : MonoBehaviour,IGetStack
         {
             yield return new WaitForSeconds(_levelUpInterval);
             _leftInstanceInterval -= _levelUpSpeedUpTime;
-            // _rightInstanceInterval -= _levelUpSpeedUpTime;
+            _rightInstanceInterval -= _levelUpSpeedUpTime;
         }
     }
 
