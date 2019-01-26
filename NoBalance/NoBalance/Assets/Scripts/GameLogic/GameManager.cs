@@ -56,7 +56,11 @@ public class GameManager : MonoBehaviour
                     PlayerPrefs.SetInt("HighScore",_Score);
                 }
                 Debug.Log("Score:" + _Score);
+#if VR_MODE
+                SceneManager.LoadScene("Title_VR");
+#else
                 SceneManager.LoadScene("Title");
+#endif
             }
         }
     }
