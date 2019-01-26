@@ -33,10 +33,10 @@ public class StackOrder : MonoBehaviour,IGetStack
     [SerializeField]
     private GameObject _leftArrow;
 
-    void GetStackLeft() { }
-    void GetStackRight() { }
-    void RemoveLeft() { }
-    void RemoveRight() { }
+    public void GetStackLeft() { }
+    public void  GetStackRight() { }
+    public void RemoveLeft() { }
+    public void RemoveRight() { }
 
     void Start()
     {
