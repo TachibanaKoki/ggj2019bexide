@@ -47,5 +47,12 @@ public class TitleManager : MonoBehaviour
 		{
 			m_colorTimer = 0;
 		}
+
+		// タッチチェック
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			Fader.FadeOut(1);
+		}
 	}
+
 }
