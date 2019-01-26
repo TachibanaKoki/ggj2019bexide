@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
     // Start is called before the first frame update
     void Start()
     {
+        _wait = 180;
         _orderStack = GetComponent<IGetStack>();
     }
 
@@ -28,7 +29,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
     {
         if (_debugInputSwitchType)
         {
-            _isLeft = !Input.GetButtonDown("ToggleLR");
+            _isLeft = !Input.GetButton("ToggleLR");
         }
         else
         {
@@ -40,60 +41,74 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
 
         // fail safe
         if (_orderStack == null) { return; }
+        if (0 < _wait)
+        {
+            --_wait;
+            return;
+        }
 
         switch (_orderStack.GetStack(_isLeft))
         {
             case OrderType.Left:
-                if (Input.GetButton("left"))
+                if (Input.GetButtonDown("left"))
                 {
                     _orderStack.Remove(_isLeft);
+                    // Debug.Log((_isLeft ? "L" : "R") + " | Left Success");
                 }
-                else if (Input.GetButton("right")
-                    || Input.GetButton("up")
-                    || Input.GetButton("down"))
+                else if (Input.GetButtonDown("right")
+                    || Input.GetButtonDown("up")
+                    || Input.GetButtonDown("down"))
                 {
-                    MissEvent.Invoke();
+                    MissEvent?.Invoke();
+                    // Debug.Log((_isLeft ? "L" : "R") + " | Left Miss");
                 }
                 break;
             case OrderType.Right:
-                if (Input.GetButton("right"))
+                if (Input.GetButtonDown("right"))
                 {
                     _orderStack.Remove(_isLeft);
+                    // Debug.Log((_isLeft ? "L" : "R") + " | Right Success");
                 }
-                else if (Input.GetButton("left")
-                    || Input.GetButton("up")
-                    || Input.GetButton("down"))
+                else if (Input.GetButtonDown("left")
+                    || Input.GetButtonDown("up")
+                    || Input.GetButtonDown("down"))
                 {
-                    MissEvent.Invoke();
+                    MissEvent?.Invoke();
+                    // Debug.Log((_isLeft ? "L" : "R") + " | Right Miss");
                 }
                 break;
             case OrderType.Up:
-                if (Input.GetButton("up"))
+                if (Input.GetButtonDown("up"))
                 {
                     _orderStack.Remove(_isLeft);
+                    // Debug.Log((_isLeft ? "L" : "R") + " | Up Success");
                 }
-                else if (Input.GetButton("left")
-                    || Input.GetButton("right")
-                    || Input.GetButton("down"))
+                else if (Input.GetButtonDown("left")
+                    || Input.GetButtonDown("right")
+                    || Input.GetButtonDown("down"))
                 {
-                    MissEvent.Invoke();
+                    MissEvent?.Invoke();
+                    // Debug.Log((_isLeft ? "L" : "R") + " | Up Miss");
                 }
                 break;
             case OrderType.Down:
-                if (Input.GetButton("down"))
+                if (Input.GetButtonDown("down"))
                 {
                     _orderStack.Remove(_isLeft);
+                    // Debug.Log((_isLeft ? "L" : "R") + " | Down Success");
                 }
-                else if (Input.GetButton("left")
-                    || Input.GetButton("right")
-                    || Input.GetButton("up"))
+                else if (Input.GetButtonDown("left")
+                    || Input.GetButtonDown("right")
+                    || Input.GetButtonDown("up"))
                 {
-                    MissEvent.Invoke();
+                    MissEvent?.Invoke();
+                    // Debug.Log((_isLeft ? "L" : "R") + " | Down Miss");
                 }
                 break;
         }
     }
 
     IGetStack _orderStack;
+    int _wait;
     bool _isLeft;
 }
