@@ -29,27 +29,23 @@ public class StackOrder : MonoBehaviour,IGetStack
     private Stack<OrderObject> _leftOrderTypes  = new Stack<OrderObject>();
 
     [SerializeField]
+    private Transform _leftSpawn;
+    [SerializeField]
+    private Transform _rightSpawn;
+
+    [SerializeField]
     private float _leftInstanceInterval = 1.0f;
     [SerializeField]
     private float _rightInstanceInterval = 1.0f;
 
     [SerializeField]
-    private GameObject _rightUpArrow;
+    private GameObject _upArrow;
     [SerializeField]
-    private GameObject _rightDownArrow;
+    private GameObject _downArrow;
     [SerializeField]
-    private GameObject _rightRightArrow;
+    private GameObject _rightArrow;
     [SerializeField]
-    private GameObject _rightLeftArrow;
-
-    [SerializeField]
-    private GameObject _leftUpArrow;
-    [SerializeField]
-    private GameObject _leftDownArrow;
-    [SerializeField]
-    private GameObject _leftRightArrow;
-    [SerializeField]
-    private GameObject _leftLeftArrow;
+    private GameObject _leftArrow;
 
     public void Start()
     {
@@ -104,47 +100,36 @@ public class StackOrder : MonoBehaviour,IGetStack
         OrderObject orderObject = new OrderObject();
         orderObject._orderType = orderType;
 
-
-        if(isLeft)
+        switch (orderType)
         {
-            switch (orderType)
-            {
-                case OrderType.Up:
-                    orderObject._gameObject = GameObject.Instantiate(_leftUpArrow);
-                    break;
-                case OrderType.Down:
-                    orderObject._gameObject = GameObject.Instantiate(_leftDownArrow);
-                    break;
-                case OrderType.Right:
-                    orderObject._gameObject = GameObject.Instantiate(_leftRightArrow);
-                    break;
-                case OrderType.Left:
-                    orderObject._gameObject = GameObject.Instantiate(_leftLeftArrow);
-                    break;
-            }
+            case OrderType.Up:
+                orderObject._gameObject = GameObject.Instantiate(_upArrow);
+                break;
+            case OrderType.Down:
+                orderObject._gameObject = GameObject.Instantiate(_downArrow);
+                break;
+            case OrderType.Right:
+                orderObject._gameObject = GameObject.Instantiate(_rightArrow);
+                break;
+            case OrderType.Left:
+                orderObject._gameObject = GameObject.Instantiate(_leftArrow);
+                break;
+        }
+
+        if (isLeft)
+        {
+            orderObject._gameObject.transform.position = _leftSpawn.position;
+            orderObject._gameObject.transform.rotation = _leftSpawn.rotation;
             orderObject._gameObject.SetActive(true);
-            //orderObject._gameObject.AddComponent<Rigidbody>();
+            orderObject._gameObject.AddComponent<Rigidbody>();
             _leftOrderTypes.Push(orderObject);
         }
         else
         {
-            switch (orderType)
-            {
-                case OrderType.Up:
-                    orderObject._gameObject = GameObject.Instantiate(_rightUpArrow);
-                    break;
-                case OrderType.Down:
-                    orderObject._gameObject = GameObject.Instantiate(_rightDownArrow);
-                    break;
-                case OrderType.Right:
-                    orderObject._gameObject = GameObject.Instantiate(_rightRightArrow);
-                    break;
-                case OrderType.Left:
-                    orderObject._gameObject = GameObject.Instantiate(_rightLeftArrow);
-                    break;
-            }
+            orderObject._gameObject.transform.position = _rightSpawn.position;
+            orderObject._gameObject.transform.rotation = _rightSpawn.rotation;
             orderObject._gameObject.SetActive(true);
-            //orderObject._gameObject.AddComponent<Rigidbody>();
+            orderObject._gameObject.AddComponent<Rigidbody>();
             _rightOrderTypes.Push(orderObject);
         }  
     }
