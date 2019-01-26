@@ -12,17 +12,24 @@ public enum OrderType
 
 public interface IGetStack
 {
-    void GetStackLeft();
-    void GetStackRight();
+    OrderType GetStackLeft();
+    OrderType GetStackRight();
     void RemoveLeft();
     void RemoveRight();
+}
+
+public class OrderObject
+{
+    public GameObject _gameObject;
+    public OrderType _orderType;
+
 }
 
 
 public class StackOrder : MonoBehaviour,IGetStack
 {
-    private Stack<OrderType> _rightOrderTypes  = new Stack<OrderType>();
-    private Stack<OrderType> _leftOrderTypes  = new Stack<OrderType>();
+    private Stack<OrderObject> _rightOrderTypes  = new Stack<OrderObject>();
+    private Stack<OrderObject> _leftOrderTypes  = new Stack<OrderObject>();
 
     [SerializeField]
     private GameObject _upArrow;
@@ -33,10 +40,24 @@ public class StackOrder : MonoBehaviour,IGetStack
     [SerializeField]
     private GameObject _leftArrow;
 
-    public void GetStackLeft() { }
-    public void  GetStackRight() { }
-    public void RemoveLeft() { }
-    public void RemoveRight() { }
+    public OrderType GetStackLeft()
+    {
+        return _leftOrderTypes.Peek()._orderType;
+    }
+
+    public OrderType GetStackRight()
+    {
+        return _rightOrderTypes.Peek()._orderType;
+    }
+
+    public void RemoveLeft()
+    {
+        GameObject.Destroy(_leftOrderTypes.Peek()._gameObject);
+    }
+    public void RemoveRight()
+    {
+        GameObject.Destroy(_rightOrderTypes.Peek()._gameObject);
+    }
 
     void Start()
     {
