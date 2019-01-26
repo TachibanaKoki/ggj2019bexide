@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     private StackOrder _orderStack;
     [SerializeField]
     Text _scoreText;
+    [SerializeField]
+    Text _playTimeText;
+    [SerializeField]
+    private float _playTime = 60.0f; 
 
     private int _Score = 0;
     private int _HighScores = 0;
