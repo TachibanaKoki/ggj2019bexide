@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         _HighScores = PlayerPrefs.GetInt("HighScore",0);
         _scoreText.text = "SCORE:"+_Score;
 
-		var random = Random.Range(1, 3);
+		var random = Random.Range(0, 100) % 3 + 1;
 		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
 		m_BGM.Play();
 	}
