@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum OrderType
 {
@@ -27,6 +28,8 @@ public class OrderObject
 
 public class StackOrder : MonoBehaviour,IGetStack
 {
+    public UnityAction<bool> OnRemoveStack;
+
     private Queue<OrderObject> _rightOrderTypes  = new Queue<OrderObject>();
     private Queue<OrderObject> _leftOrderTypes  = new Queue<OrderObject>();
 
@@ -124,6 +127,7 @@ public class StackOrder : MonoBehaviour,IGetStack
         if (isLeft)
         {
             if (_leftOrderTypes.Count <= 0) return;
+            OnRemoveStack?.Invoke(true);
             GameObject.Destroy(_leftOrderTypes.Dequeue()._gameObject);
 			var seObj = GameObject.Find("SE").GetComponent<AudioSource>();
 			seObj.Play();
@@ -131,6 +135,7 @@ public class StackOrder : MonoBehaviour,IGetStack
         else
         {
             if (_rightOrderTypes.Count <= 0) return;
+            OnRemoveStack?.Invoke(false);
             GameObject.Destroy(_rightOrderTypes.Dequeue()._gameObject);
 			var seObj = GameObject.Find("SE").GetComponent<AudioSource>();
 			seObj.Play();
