@@ -69,12 +69,12 @@ public class StackOrder : MonoBehaviour,IGetStack
         StartCoroutine(LeftLaneInstance());
         StartCoroutine(RightLaneInstance());
 
+
 		var random = Random.Range(1, 4);
 		var BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
 		BGM.Play();
 
         StartCoroutine(LevelUp());
-
     }
 
     IEnumerator LeftLaneInstance()

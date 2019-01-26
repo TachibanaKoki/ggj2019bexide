@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
     {
         _Timer += Time.deltaTime;
         _playTimeText.text =  Mathf.Max(0, Mathf.Floor(_playTime - _Timer)).ToString();
-        if (_Timer<=0.0f)
+
+        if (_playTime <= _Timer)
         {
             //todo tmp
             GameOver();
