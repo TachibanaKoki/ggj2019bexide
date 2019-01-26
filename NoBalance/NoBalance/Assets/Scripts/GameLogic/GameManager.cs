@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private StackOrder _orderStack;
     [SerializeField]
-    TextMeshPro _scoreText;
+    Text _scoreText;
 
     private int _Score = 0;
     private int _HighScores = 0;
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         GameOverCollider.GameOverEvent += this.GameOver;
         _orderStack.OnRemoveStack += this.RemoveStack;
         _HighScores = PlayerPrefs.GetInt("HighScore",0);
+        _scoreText.text = "SCORE:"+_Score;
     }
 
     public void Update()
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void RemoveStack(bool isLeft)
     {
         _Score++;
+        _scoreText.text = "SCORE:" + _Score;
     }
 
     public void MissPenalty(bool isLeft)
