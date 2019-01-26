@@ -80,7 +80,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             if (0 < _penaltyRestNumLeft) {
                 --_penaltyRestNumLeft;
                 interval -= _penaltyInterval;
-                if (interval < 1.0f) { interval = 1.0f; }
             }
             yield return new WaitForSeconds(interval);
         }
@@ -95,7 +94,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             if (0 < _penaltyRestNumRight) {
                 --_penaltyRestNumRight;
                 interval -= _penaltyInterval;
-                if (interval < 1.0f) { interval = 1.0f; }
             }
             yield return new WaitForSeconds(interval);
         }
@@ -107,7 +105,9 @@ public class StackOrder : MonoBehaviour,IGetStack
         {
             yield return new WaitForSeconds(_levelUpInterval);
             _leftInstanceInterval -= _levelUpSpeedUpTime;
+            if (_leftInstanceInterval < 1.0f) { _leftInstanceInterval = 1.0f; }
             _rightInstanceInterval -= _levelUpSpeedUpTime;
+            if (_rightInstanceInterval < 1.0f) { _rightInstanceInterval = 1.0f; }
         }
     }
 
