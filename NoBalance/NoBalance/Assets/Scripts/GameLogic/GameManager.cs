@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,16 +12,36 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private StackOrder _orderStack;
     [SerializeField]
-    private GameOverCollider _gameOverCollider;
+    Text _scoreText;
+    [SerializeField]
+    Text _playTimeText;
+    [SerializeField]
+    private float _playTime = 60.0f;
+
+    private float _Timer = 0.0f;
+
+    private int _Score = 0;
+    private int _HighScores = 0;
 
     public void Start()
     {
         _inputManager.MissEvent += this.MissPenalty;
         GameOverCollider.GameOverEvent += this.GameOver;
+        _orderStack.OnRemoveStack += this.RemoveStack;
+        _HighScores = PlayerPrefs.GetInt("HighScore",0);
+        _scoreText.text = "SCORE:"+_Score;
     }
 
     public void Update()
     {
+        _Timer += Time.deltaTime;
+        _playTimeText.text =  Mathf.Max(0, Mathf.Floor(_playTime - _Timer)).ToString();
+        if (_Timer<=0.0f)
+        {
+            //todo tmp
+            GameOver();
+        }
+
         if (0.0f < _gameOverDemoTimer)
         {
             _gameOverDemoTimer -= Time.fixedDeltaTime;
@@ -28,9 +49,21 @@ public class GameManager : MonoBehaviour
             {
                 // tmp
                 Time.timeScale = 1.0f;
+                if(_HighScores<_Score)
+                {
+                    Debug.Log("NEW RECORED:"+_Score);
+                    PlayerPrefs.SetInt("HighScore",_Score);
+                }
+                Debug.Log("Score:" + _Score);
                 SceneManager.LoadScene("Title");
             }
         }
+    }
+
+    public void RemoveStack(bool isLeft)
+    {
+        _Score++;
+        _scoreText.text = "SCORE:" + _Score;
     }
 
     public void MissPenalty(bool isLeft)

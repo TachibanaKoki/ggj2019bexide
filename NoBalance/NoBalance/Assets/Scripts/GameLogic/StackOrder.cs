@@ -43,6 +43,12 @@ public class StackOrder : MonoBehaviour,IGetStack
     [SerializeField]
     private float _rightInstanceInterval = 1.0f;
     [SerializeField]
+    [Header("何秒置きに加速するか")]
+    private float _levelUpInterval = 10.0f;
+    [SerializeField]
+    [Header("加速時に何秒縮めるか")]
+    private float _levelUpSpeedUpTime = 0.1f;
+    [SerializeField]
     [Header("ペナルティで何個分生成を早くするか")]
     private int _penaltyNum;
     [SerializeField]
@@ -62,6 +68,13 @@ public class StackOrder : MonoBehaviour,IGetStack
     {
         StartCoroutine(LeftLaneInstance());
         StartCoroutine(RightLaneInstance());
+
+		var random = Random.Range(1, 4);
+		var BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
+		BGM.Play();
+
+        StartCoroutine(LevelUp());
+
     }
 
     IEnumerator LeftLaneInstance()
@@ -89,6 +102,18 @@ public class StackOrder : MonoBehaviour,IGetStack
                 interval -= _penaltyInterval;
             }
             yield return new WaitForSeconds(interval);
+        }
+    }
+
+    IEnumerator LevelUp()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(_levelUpInterval);
+            _leftInstanceInterval -= _levelUpSpeedUpTime;
+            if (_leftInstanceInterval < 1.0f) { _leftInstanceInterval = 1.0f; }
+            _rightInstanceInterval -= _levelUpSpeedUpTime;
+            if (_rightInstanceInterval < 1.0f) { _rightInstanceInterval = 1.0f; }
         }
     }
 
@@ -129,7 +154,8 @@ public class StackOrder : MonoBehaviour,IGetStack
             if (_leftOrderTypes.Count <= 0) return;
             OnRemoveStack?.Invoke(true);
             GameObject.Destroy(_leftOrderTypes.Dequeue()._gameObject);
-			var seObj = GameObject.Find("SE").GetComponent<AudioSource>();
+			var random = Random.Range(1, 6);
+			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
 			seObj.Play();
         }
         else
@@ -137,7 +163,8 @@ public class StackOrder : MonoBehaviour,IGetStack
             if (_rightOrderTypes.Count <= 0) return;
             OnRemoveStack?.Invoke(false);
             GameObject.Destroy(_rightOrderTypes.Dequeue()._gameObject);
-			var seObj = GameObject.Find("SE").GetComponent<AudioSource>();
+			var random = Random.Range(1, 6);
+			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
 			seObj.Play();
 		}
     }
