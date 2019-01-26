@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +12,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private StackOrder _orderStack;
     [SerializeField]
-    private GameOverCollider _gameOverCollider;
+    TextMeshPro _scoreText;
+
+    private int _Score = 0;
+    private int _HighScores = 0;
 
     public void Start()
     {
         _inputManager.MissEvent += this.MissPenalty;
         GameOverCollider.GameOverEvent += this.GameOver;
+        _orderStack.OnRemoveStack += this.RemoveStack;
+        _HighScores = PlayerPrefs.GetInt("HighScore",0);
     }
 
     public void Update()
@@ -28,9 +34,20 @@ public class GameManager : MonoBehaviour
             {
                 // tmp
                 Time.timeScale = 1.0f;
+                if(_HighScores<_Score)
+                {
+                    Debug.Log("NEW RECORED:"+_Score);
+                    PlayerPrefs.SetInt("HighScore",_Score);
+                }
+                Debug.Log("Score:" + _Score);
                 SceneManager.LoadScene("Title");
             }
         }
+    }
+
+    public void RemoveStack(bool isLeft)
+    {
+        _Score++;
     }
 
     public void MissPenalty(bool isLeft)
