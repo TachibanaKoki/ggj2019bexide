@@ -70,7 +70,7 @@ public class StackOrder : MonoBehaviour,IGetStack
         StartCoroutine(RightLaneInstance());
 
 
-		var random = Random.Range(1, 4);
+		var random = Random.Range(1, 3);
 		var BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
 		BGM.Play();
 
