@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public interface IMissEventPublisher
-{
-    UnityAction MissEvent { get; set;}
-}
-
-public class InputManager : MonoBehaviour, IMissEventPublisher
+public class InputManager : MonoBehaviour
 {
     [SerializeField]
+    public UnityAction<bool> MissEvent { get; set; }
 
-    public UnityAction MissEvent { get; set; }
+    public void MissPenalty(bool isLeft)
+    {
+        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, -2.0f);
+        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, -1.0f);
+        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, 0.0f);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         _orderStack = GetComponent<IGetStack>();
+        MissEvent += this.MissPenalty;
     }
 
     // Update is called once per frame
@@ -40,7 +42,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
                     || Input.GetButtonDown("up1")
                     || Input.GetButtonDown("down1"))
                 {
-                    MissEvent?.Invoke();
+                    MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Left Miss");
                 }
                 break;
@@ -54,7 +56,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
                     || Input.GetButtonDown("up1")
                     || Input.GetButtonDown("down1"))
                 {
-                    MissEvent?.Invoke();
+                    MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Right Miss");
                 }
                 break;
@@ -68,7 +70,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
                     || Input.GetButtonDown("right1")
                     || Input.GetButtonDown("down1"))
                 {
-                    MissEvent?.Invoke();
+                    MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Up Miss");
                 }
                 break;
@@ -82,7 +84,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
                     || Input.GetButtonDown("right1")
                     || Input.GetButtonDown("up1"))
                 {
-                    MissEvent?.Invoke();
+                    MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Down Miss");
                 }
                 break;
@@ -102,7 +104,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
                     || Input.GetButtonDown("up2")
                     || Input.GetButtonDown("down2"))
                 {
-                    MissEvent?.Invoke();
+                    MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Left Miss");
                 }
                 break;
@@ -116,7 +118,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
                     || Input.GetButtonDown("up2")
                     || Input.GetButtonDown("down2"))
                 {
-                    MissEvent?.Invoke();
+                    MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Right Miss");
                 }
                 break;
@@ -130,7 +132,7 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
                     || Input.GetButtonDown("right2")
                     || Input.GetButtonDown("down2"))
                 {
-                    MissEvent?.Invoke();
+                    MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Up Miss");
                 }
                 break;
@@ -144,11 +146,12 @@ public class InputManager : MonoBehaviour, IMissEventPublisher
                     || Input.GetButtonDown("right2")
                     || Input.GetButtonDown("up2"))
                 {
-                    MissEvent?.Invoke();
+                    MissEvent?.Invoke(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Down Miss");
                 }
                 break;
         }
+
     }
 
     IGetStack _orderStack;
