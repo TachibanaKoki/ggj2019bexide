@@ -70,7 +70,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             if (0 < _penaltyRestNumLeft) {
                 --_penaltyRestNumLeft;
                 interval -= _penaltyInterval;
-                Debug.Log("Left: rest " + _penaltyRestNumLeft + " interval " + interval);
             }
             yield return new WaitForSeconds(interval);
         }
@@ -85,7 +84,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             if (0 < _penaltyRestNumRight) {
                 --_penaltyRestNumRight;
                 interval -= _penaltyInterval;
-                Debug.Log("Right: rest " + _penaltyRestNumLeft + " interval " + interval);
             }
             yield return new WaitForSeconds(interval);
         }
@@ -176,12 +174,10 @@ public class StackOrder : MonoBehaviour,IGetStack
     {
         if (isLeft)
         {
-            Debug.Log("penalty left");
             _penaltyRestNumLeft += _penaltyNum;
         }
         else
         {
-            Debug.Log("penalty right");
             _penaltyRestNumRight += _penaltyNum;
         }
     }
