@@ -11,16 +11,17 @@ public class TitleManager : MonoBehaviour
 	private Text m_touchText;
 
 	private float m_colorTimer;
-	
-    // Start is called before the first frame update
-    void Start()
+
+
+	// Start is called before the first frame update
+	void Start()
     {
 		m_titleImage = transform.Find("Image").GetComponent<Image>();
 		m_touchText = transform.Find("Text").GetComponent<Text>();
 		m_colorTimer = 0;
 
 		// プラットフォームに合わせてケースわけ？（できるのであれば
-		m_touchText.text = "Tap to Start";
+		m_touchText.text = "Press to Start";
 
 		Fader.FadeIn();
     }
@@ -51,10 +52,11 @@ public class TitleManager : MonoBehaviour
 		}
 
 		// タッチチェック
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("A Button"))
 		{
 			Fader.FadeOut(1);
 		}
+
 	}
 
 }

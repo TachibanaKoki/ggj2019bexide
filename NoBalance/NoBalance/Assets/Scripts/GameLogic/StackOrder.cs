@@ -39,6 +39,12 @@ public class StackOrder : MonoBehaviour,IGetStack
     private float _leftInstanceInterval = 1.0f;
     [SerializeField]
     private float _rightInstanceInterval = 1.0f;
+    [SerializeField]
+    [Header("ペナルティで何個分生成を早くするか")]
+    private int _penaltyNum;
+    [SerializeField]
+    [Header("ペナルティで何秒早く出すか")]
+    private float _penaltyInterval;
 
     [SerializeField]
     private GameObject _upArrow;
@@ -60,7 +66,13 @@ public class StackOrder : MonoBehaviour,IGetStack
         while(true)
         {
             OrderInstance((OrderType)Random.Range(0,4),true);
-            yield return new WaitForSeconds(_leftInstanceInterval);
+            float interval = _leftInstanceInterval;
+            if (0 < _penaltyRestNumLeft) {
+                --_penaltyRestNumLeft;
+                interval -= _penaltyInterval;
+                Debug.Log("Left: rest " + _penaltyRestNumLeft + " interval " + interval);
+            }
+            yield return new WaitForSeconds(interval);
         }
     }
 
@@ -69,7 +81,13 @@ public class StackOrder : MonoBehaviour,IGetStack
        while(true)
         {
             OrderInstance((OrderType)Random.Range(0, 4), false);
-            yield return new WaitForSeconds(_rightInstanceInterval);
+            float interval = _rightInstanceInterval;
+            if (0 < _penaltyRestNumRight) {
+                --_penaltyRestNumRight;
+                interval -= _penaltyInterval;
+                Debug.Log("Right: rest " + _penaltyRestNumLeft + " interval " + interval);
+            }
+            yield return new WaitForSeconds(interval);
         }
     }
 
@@ -153,4 +171,21 @@ public class StackOrder : MonoBehaviour,IGetStack
             _rightOrderTypes.Enqueue(orderObject);
         }  
     }
+
+    public void SetPenalty(bool isLeft)
+    {
+        if (isLeft)
+        {
+            Debug.Log("penalty left");
+            _penaltyRestNumLeft += _penaltyNum;
+        }
+        else
+        {
+            Debug.Log("penalty right");
+            _penaltyRestNumRight += _penaltyNum;
+        }
+    }
+
+    int _penaltyRestNumLeft = 0;
+    int _penaltyRestNumRight = 0;
 }

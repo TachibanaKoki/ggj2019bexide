@@ -47,6 +47,8 @@ MonoBehaviour:
   _rightSpawn: {fileID: 0}
   _leftInstanceInterval: 2
   _rightInstanceInterval: 2
+  _penaltyNum: 3
+  _penaltyInterval: 1.8
   _upArrow: {fileID: 397941453625721064, guid: 80404b932550c864a9989bff7b6d8f49, type: 3}
   _downArrow: {fileID: 5907429027724317835, guid: 9f6b845b68d96b546a286bf643b5e050,
     type: 3}
