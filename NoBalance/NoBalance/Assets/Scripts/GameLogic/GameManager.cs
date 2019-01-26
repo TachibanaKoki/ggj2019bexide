@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Text _playTimeText;
     [SerializeField]
-    private float _playTime = 60.0f; 
+    private float _playTime = 60.0f;
+
+    private float _Timer = 0.0f;
 
     private int _Score = 0;
     private int _HighScores = 0;
@@ -32,6 +34,14 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        _Timer += Time.deltaTime;
+        _playTimeText.text =  Mathf.Max(0, Mathf.Floor(_playTime - _Timer)).ToString();
+        if (_Timer<=0.0f)
+        {
+            //todo tmp
+            GameOver();
+        }
+
         if (0.0f < _gameOverDemoTimer)
         {
             _gameOverDemoTimer -= Time.fixedDeltaTime;
