@@ -14,7 +14,7 @@ public enum OrderType
 public class StackOrder : MonoBehaviour
 {
     public List<OrderType> _rightOrderTypes { get; private set; } = new List<OrderType>();
-    public List<OrderType> _LeftOrderTypes { get; private set; } = new List<OrderType>();
+    public List<OrderType> _leftOrderTypes { get; private set; } = new List<OrderType>();
 
     // Start is called before the first frame update
     void Start()
