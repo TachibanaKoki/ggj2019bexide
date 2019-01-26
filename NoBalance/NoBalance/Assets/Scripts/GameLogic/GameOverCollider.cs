@@ -5,13 +5,13 @@ using UnityEngine.Events;
 
 public class GameOverCollider : MonoBehaviour
 {
-    public static  UnityAction GameOverEvent;
+    public static  UnityAction<bool> GameOverEvent;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Arrow")
         {
-            GameOverEvent?.Invoke();
+            GameOverEvent?.Invoke(false);
         }
     }
 }

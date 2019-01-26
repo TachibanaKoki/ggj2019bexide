@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     private int _Score = 0;
     private int _HighScores = 0;
 
+	private AudioSource m_BGM;
+	private bool m_Clear;
+
     public void Start()
     {
         _inputManager.MissEvent += this.MissPenalty;
@@ -30,7 +33,11 @@ public class GameManager : MonoBehaviour
         _orderStack.OnRemoveStack += this.RemoveStack;
         _HighScores = PlayerPrefs.GetInt("HighScore",0);
         _scoreText.text = "SCORE:"+_Score;
-    }
+
+		var random = Random.Range(1, 3);
+		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
+		m_BGM.Play();
+	}
 
     public void Update()
     {
@@ -39,8 +46,7 @@ public class GameManager : MonoBehaviour
 
         if (_playTime <= _Timer)
         {
-            //todo tmp
-            GameOver();
+			GameOver(true);
         }
 
         if (0.0f < _gameOverDemoTimer)
@@ -72,15 +78,30 @@ public class GameManager : MonoBehaviour
         _orderStack.SetPenalty(isLeft);
     }
 
-    public void GameOver()
+    public void GameOver(bool clear)
     {
         // tmp
         Time.timeScale = 0.0f;
         if (_gameOverDemoTimer <= 0.0f)
         {
-            _gameOverDemoTimer = 1.0f;
+            _gameOverDemoTimer = 35.0f;
         }
-    }
 
-    float _gameOverDemoTimer = 0.0f;
+		m_BGM.Stop();
+		if (clear)
+		{
+			// éüÇ…ñ¬ÇÁÇ∑BGMÇÃê›íË
+			m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();			
+		}
+		else
+		{
+			// éüÇ…ñ¬ÇÁÇ∑BGMÇÃê›íË
+			m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();			
+		}
+		m_BGM.Play();
+
+
+	}
+
+	float _gameOverDemoTimer = 0.0f;
 }
