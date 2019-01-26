@@ -42,7 +42,7 @@ public class Fader : MonoBehaviour
 		fadeImage.transform.SetParent(fadeCanvas.transform, false);
 		fadeImage.rectTransform.anchoredPosition = Vector3.zero;
 
-		fadeImage.rectTransform.sizeDelta = new Vector2(900, 500);
+		fadeImage.rectTransform.sizeDelta = new Vector2(2000, 800);
 	}
 
 	//フェードイン開始
