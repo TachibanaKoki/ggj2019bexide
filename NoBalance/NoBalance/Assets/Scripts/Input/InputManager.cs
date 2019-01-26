@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
         switch (_orderStack.GetStack(isLeft))
         {
             case OrderType.Left:
-                if (Input.GetButtonDown("left1"))
+                if (Input.GetButtonDown("left1")||ViveInput.GetDownLeft1())
                 {
                     _orderStack.Remove(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Left Success");
@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
                 }
                 break;
             case OrderType.Right:
-                if (Input.GetButtonDown("right1"))
+                if (Input.GetButtonDown("right1")|| ViveInput.GetDownRight1())
                 {
                     _orderStack.Remove(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Right Success");
@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
                 }
                 break;
             case OrderType.Up:
-                if (Input.GetButtonDown("up1"))
+                if (Input.GetButtonDown("up1")||ViveInput.GetDownUp1())
                 {
                     _orderStack.Remove(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Up Success");
@@ -67,7 +67,7 @@ public class InputManager : MonoBehaviour
                 }
                 break;
             case OrderType.Down:
-                if (Input.GetButtonDown("down1"))
+                if (Input.GetButtonDown("down1")|| ViveInput.GetDownDown1())
                 {
                     _orderStack.Remove(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Down Success");
@@ -87,7 +87,7 @@ public class InputManager : MonoBehaviour
         switch (_orderStack.GetStack(isLeft))
         {
             case OrderType.Left:
-                if (Input.GetButtonDown("left2"))
+                if (Input.GetButtonDown("left2")||ViveInput.GetDownLeft2())
                 {
                     _orderStack.Remove(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Left Success");
@@ -101,7 +101,7 @@ public class InputManager : MonoBehaviour
                 }
                 break;
             case OrderType.Right:
-                if (Input.GetButtonDown("right2"))
+                if (Input.GetButtonDown("right2") || ViveInput.GetDownRight2())
                 {
                     _orderStack.Remove(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Right Success");
@@ -115,7 +115,7 @@ public class InputManager : MonoBehaviour
                 }
                 break;
             case OrderType.Up:
-                if (Input.GetButtonDown("up2"))
+                if (Input.GetButtonDown("up2") || ViveInput.GetDownUp2())
                 {
                     _orderStack.Remove(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Up Success");
@@ -129,7 +129,7 @@ public class InputManager : MonoBehaviour
                 }
                 break;
             case OrderType.Down:
-                if (Input.GetButtonDown("down2"))
+                if (Input.GetButtonDown("down2")|| ViveInput.GetDownDown2())
                 {
                     _orderStack.Remove(isLeft);
                     // Debug.Log((isLeft ? "L" : "R") + " | Down Success");
