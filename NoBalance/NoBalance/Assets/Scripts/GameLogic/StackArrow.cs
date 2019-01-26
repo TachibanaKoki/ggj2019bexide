@@ -12,17 +12,14 @@ public enum OrderType
 
 public interface IGetStack
 {
-    OrderType GetStackLeft();
-    OrderType GetStackRight();
-    void RemoveLeft();
-    void RemoveRight();
+    OrderType GetStack(bool isLeft);
+    void Remove(bool isLeft);
 }
 
 public class OrderObject
 {
     public GameObject _gameObject;
     public OrderType _orderType;
-
 }
 
 
@@ -32,40 +29,76 @@ public class StackOrder : MonoBehaviour,IGetStack
     private Stack<OrderObject> _leftOrderTypes  = new Stack<OrderObject>();
 
     [SerializeField]
+    private Transform _leftSpawnPostion;
+    [SerializeField]
+    private Transform _rightSpawnPostion;
+
+    [SerializeField]
     private GameObject _upArrow;
     [SerializeField]
     private GameObject _downArrow;
     [SerializeField]
-    private GameObject _RightArrow;
+    private GameObject _rightArrow;
     [SerializeField]
     private GameObject _leftArrow;
 
-    public OrderType GetStackLeft()
+
+
+    public OrderType GetStack(bool isleft)
     {
-        return _leftOrderTypes.Peek()._orderType;
+        if (isleft)
+        {
+            return _leftOrderTypes.Peek()._orderType;
+        }
+        else
+        {
+            return _rightOrderTypes.Peek()._orderType;
+        }
     }
 
-    public OrderType GetStackRight()
+    public void Remove(bool isLeft)
     {
-        return _rightOrderTypes.Peek()._orderType;
+        if (isLeft)
+        {
+            GameObject.Destroy(_leftOrderTypes.Pop()._gameObject);
+        }
+        else
+        {
+            GameObject.Destroy(_rightOrderTypes.Pop()._gameObject);
+        }
     }
 
-    public void RemoveLeft()
+    private void OrderInstance(OrderType orderType,bool isLeft)
     {
-        GameObject.Destroy(_leftOrderTypes.Peek()._gameObject);
-    }
-    public void RemoveRight()
-    {
-        GameObject.Destroy(_rightOrderTypes.Peek()._gameObject);
-    }
+        OrderObject orderObject = new OrderObject();
+        orderObject._orderType = orderType;
+        switch (orderType)
+        {
+            case OrderType.Up:
+                orderObject._gameObject = GameObject.Instantiate(_upArrow);
+                break;
+            case OrderType.Down:
+                orderObject._gameObject = GameObject.Instantiate(_downArrow);
+                break;
+            case OrderType.Right:
+                orderObject._gameObject = GameObject.Instantiate(_rightArrow);
+                break;
+            case OrderType.Left:
+                orderObject._gameObject = GameObject.Instantiate(_leftArrow);
+                break;
+        }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
+        if(isLeft)
+        {
+            orderObject._gameObject.transform.position = _leftSpawnPostion.position;
+            orderObject._gameObject.transform.rotation = _leftSpawnPostion.rotation;
+            _leftOrderTypes.Push(orderObject);
+        }
+        else
+        {
+            orderObject._gameObject.transform.position = _rightSpawnPostion.position;
+            orderObject._gameObject.transform.rotation = _rightSpawnPostion.rotation;
+            _leftOrderTypes.Push(orderObject);
+        }  
     }
 }
