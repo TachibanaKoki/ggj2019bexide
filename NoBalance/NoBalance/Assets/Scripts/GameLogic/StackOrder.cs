@@ -121,7 +121,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             orderObject._gameObject.transform.position = _leftSpawn.position;
             orderObject._gameObject.transform.rotation = _leftSpawn.rotation;
             orderObject._gameObject.SetActive(true);
-            orderObject._gameObject.AddComponent<Rigidbody>();
             _leftOrderTypes.Push(orderObject);
         }
         else
@@ -129,7 +128,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             orderObject._gameObject.transform.position = _rightSpawn.position;
             orderObject._gameObject.transform.rotation = _rightSpawn.rotation;
             orderObject._gameObject.SetActive(true);
-            orderObject._gameObject.AddComponent<Rigidbody>();
             _rightOrderTypes.Push(orderObject);
         }  
     }
