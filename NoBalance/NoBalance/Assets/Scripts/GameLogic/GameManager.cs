@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
                     PlayerPrefs.SetInt("HighScore",_Score);
                 }
                 Debug.Log("Score:" + _Score);
-                SceneManager.LoadScene("Title");
+				SceneManager.LoadScene("Title");
             }
         }
     }
@@ -82,25 +82,25 @@ public class GameManager : MonoBehaviour
     {
         // tmp
         Time.timeScale = 0.0f;
-        if (_gameOverDemoTimer <= 0.0f)
-        {
-            _gameOverDemoTimer = 35.0f;
-        }
-
-		m_BGM.Stop();
-		if (clear)
+		if (_gameOverDemoTimer <= 0.0f)
 		{
-			// Ÿ‚É–Â‚ç‚·BGM‚Ìİ’è
-			m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();			
-		}
-		else
-		{
-			// Ÿ‚É–Â‚ç‚·BGM‚Ìİ’è
-			m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();			
-		}
-		m_BGM.Play();
 
+			m_BGM.Stop();
+			if (clear)
+			{
+				_gameOverDemoTimer = 15.0f;
+				// Ÿ‚É–Â‚ç‚·BGM‚Ìİ’è
+				m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();
+			}
+			else
+			{
+				_gameOverDemoTimer = 35.0f;
+				// Ÿ‚É–Â‚ç‚·BGM‚Ìİ’è
+				m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
+			}
+			m_BGM.Play();
 
+		}
 	}
 
 	float _gameOverDemoTimer = 0.0f;
