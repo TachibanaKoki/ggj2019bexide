@@ -17,6 +17,14 @@ public class ViveInput : MonoBehaviour
 
     public static bool GetDownRight1()
     {
+        try
+        {
+            Vector2 p = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
+        }
+        catch
+        {
+            return false;
+        }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
         if (position.x <= Mathf.Abs(position.y))
         {
@@ -40,6 +48,16 @@ public class ViveInput : MonoBehaviour
     }
     public static bool GetDownLeft1()
     {
+        try
+        {
+            Vector2 p = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
+        }
+        catch
+        {
+            return false;
+        }
+
+
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
         if (position.x >= -Mathf.Abs(position.y))
         {
@@ -64,6 +82,14 @@ public class ViveInput : MonoBehaviour
     }
     public static bool GetDownUp1()
     {
+        try
+        {
+            Vector2 p = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
+        }
+        catch
+        {
+            return false;
+        }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
         if (position.y <= Mathf.Abs(position.x))
         {
@@ -87,6 +113,14 @@ public class ViveInput : MonoBehaviour
     }
     public static bool GetDownDown1()
     {
+        try
+        {
+            Vector2 p = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
+        }
+        catch
+        {
+            return false;
+        }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
         if (position.y >= -Mathf.Abs(position.x))
         {
@@ -110,6 +144,14 @@ public class ViveInput : MonoBehaviour
     }
     public static bool GetDownRight2()
     {
+        try
+        {
+            Vector2 p = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
+        }
+        catch
+        {
+            return false;
+        }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.LeftHand);
         if (position.x <= Mathf.Abs(position.y))
         {
@@ -133,6 +175,14 @@ public class ViveInput : MonoBehaviour
     }
     public static bool GetDownLeft2()
     {
+        try
+        {
+            Vector2 p = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
+        }
+        catch
+        {
+            return false;
+        }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.LeftHand);
         if (position.x >= -Mathf.Abs(position.y))
         {
@@ -156,6 +206,14 @@ public class ViveInput : MonoBehaviour
     }
     public static bool GetDownUp2()
     {
+        try
+        {
+            Vector2 p = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
+        }
+        catch
+        {
+            return false;
+        }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.LeftHand);
         if (position.y <= Mathf.Abs(position.x))
         {
@@ -179,6 +237,14 @@ public class ViveInput : MonoBehaviour
     }
     public static bool GetDownDown2()
     {
+        try
+        {
+            Vector2 p = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
+        }
+        catch
+        {
+            return false;
+        }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.LeftHand);
         if (position.y >= -Mathf.Abs(position.x))
         {
