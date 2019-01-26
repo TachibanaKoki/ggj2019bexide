@@ -75,17 +75,31 @@ public class StackOrder : MonoBehaviour,IGetStack
 
     public OrderType GetStack(bool isleft)
     {
-
         if (isleft)
         {
             if (_leftOrderTypes.Count <= 0) return OrderType.NULL;
             OrderObject oo =   _leftOrderTypes.Peek();
-            return oo._orderType;
+            if (oo._gameObject.GetComponent<Arrow>()._isGround)
+            {
+                return oo._orderType;
+            }
+            else
+            {
+                return OrderType.NULL;
+            }
         }
         else
         {
             if (_rightOrderTypes.Count <= 0) return OrderType.NULL;
-            return _rightOrderTypes.Peek()._orderType;
+            OrderObject oo = _rightOrderTypes.Peek();
+            if (oo._gameObject.GetComponent<Arrow>()._isGround)
+            {
+                return oo._orderType;
+            }
+            else
+            {
+                return OrderType.NULL;
+            }
         }
     }
 
@@ -103,7 +117,7 @@ public class StackOrder : MonoBehaviour,IGetStack
         }
     }
 
-    public void OrderInstance(OrderType orderType,bool isLeft)
+    public void OrderInstance(OrderType orderType,bool isLeft,float Offset)
     {
         OrderObject orderObject = new OrderObject();
         orderObject._orderType = orderType;
@@ -126,14 +140,14 @@ public class StackOrder : MonoBehaviour,IGetStack
 
         if (isLeft)
         {
-            orderObject._gameObject.transform.position = _leftSpawn.position;
+            orderObject._gameObject.transform.position = _leftSpawn.position + new Vector3(0,Offset,0);
             orderObject._gameObject.transform.rotation = _leftSpawn.rotation;
             orderObject._gameObject.SetActive(true);
             _leftOrderTypes.Enqueue(orderObject);
         }
         else
         {
-            orderObject._gameObject.transform.position = _rightSpawn.position;
+            orderObject._gameObject.transform.position = _rightSpawn.position + new Vector3(0, Offset, 0);
             orderObject._gameObject.transform.rotation = _rightSpawn.rotation;
             orderObject._gameObject.SetActive(true);
             _rightOrderTypes.Enqueue(orderObject);
