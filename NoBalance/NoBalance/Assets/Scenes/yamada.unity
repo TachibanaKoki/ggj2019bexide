@@ -1929,6 +1929,11 @@ PrefabInstance:
       propertyPath: _rightSpawn
       value: 
       objectReference: {fileID: 207287147}
+    - target: {fileID: 1253054502797890973, guid: 8280696c18fef794c919e0f8142043ee,
+        type: 3}
+      propertyPath: _levelUpInterval
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1253054502797890974, guid: 8280696c18fef794c919e0f8142043ee, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8280696c18fef794c919e0f8142043ee, type: 3}

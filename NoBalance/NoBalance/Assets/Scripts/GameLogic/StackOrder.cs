@@ -43,6 +43,12 @@ public class StackOrder : MonoBehaviour,IGetStack
     [SerializeField]
     private float _rightInstanceInterval = 1.0f;
     [SerializeField]
+    [Header("何秒置きに加速するか")]
+    private float _levelUpInterval = 10.0f;
+    [SerializeField]
+    [Header("加速時に何秒縮めるか")]
+    private float _levelUpSpeedUpTime = 0.1f;
+    [SerializeField]
     [Header("ペナルティで何個分生成を早くするか")]
     private int _penaltyNum;
     [SerializeField]
@@ -62,6 +68,7 @@ public class StackOrder : MonoBehaviour,IGetStack
     {
         StartCoroutine(LeftLaneInstance());
         StartCoroutine(RightLaneInstance());
+        StartCoroutine(LevelUp());
     }
 
     IEnumerator LeftLaneInstance()
@@ -73,6 +80,7 @@ public class StackOrder : MonoBehaviour,IGetStack
             if (0 < _penaltyRestNumLeft) {
                 --_penaltyRestNumLeft;
                 interval -= _penaltyInterval;
+                if (interval < 1.0f) { interval = 1.0f; }
             }
             yield return new WaitForSeconds(interval);
         }
@@ -87,8 +95,19 @@ public class StackOrder : MonoBehaviour,IGetStack
             if (0 < _penaltyRestNumRight) {
                 --_penaltyRestNumRight;
                 interval -= _penaltyInterval;
+                if (interval < 1.0f) { interval = 1.0f; }
             }
             yield return new WaitForSeconds(interval);
+        }
+    }
+
+    IEnumerator LevelUp()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(_levelUpInterval);
+            _leftInstanceInterval -= _levelUpSpeedUpTime;
+            // _rightInstanceInterval -= _levelUpSpeedUpTime;
         }
     }
 
