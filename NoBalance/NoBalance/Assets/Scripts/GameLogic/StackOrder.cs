@@ -16,7 +16,6 @@ public interface IGetStack
 {
     OrderType GetStack(bool isLeft);
     void Remove(bool isLeft);
-    void OrderInstance(OrderType orderType, bool isLeft,float offset);
 }
 
 public class OrderObject
@@ -54,6 +53,9 @@ public class StackOrder : MonoBehaviour,IGetStack
     [SerializeField]
     [Header("ペナルティで何秒早く出すか")]
     private float _penaltyInterval;
+    [SerializeField]
+        [Header("硬いやつが出る確率(％)")]
+    private int _hardAppearPercent = 50;
 
     [SerializeField]
     private GameObject _upArrow;
@@ -76,7 +78,8 @@ public class StackOrder : MonoBehaviour,IGetStack
     {
         while(true)
         {
-            OrderInstance((OrderType)Random.Range(0,4),true);
+            bool isHard = Random.Range(0, 100) < _hardAppearPercent;
+            OrderInstance((OrderType)Random.Range(0, 4),true, (isHard ? 3 : 0));
             float interval = _leftInstanceInterval;
             if (0 < _penaltyRestNumLeft) {
                 --_penaltyRestNumLeft;
@@ -90,7 +93,8 @@ public class StackOrder : MonoBehaviour,IGetStack
     {
        while(true)
         {
-            OrderInstance((OrderType)Random.Range(0, 4), false);
+            bool isHard = Random.Range(0, 100) < 50;
+            OrderInstance((OrderType)Random.Range(0, 4),false, (isHard ? 3 : 0));
             float interval = _rightInstanceInterval;
             if (0 < _penaltyRestNumRight) {
                 --_penaltyRestNumRight;
@@ -147,7 +151,16 @@ public class StackOrder : MonoBehaviour,IGetStack
         if (isLeft)
         {
             if (_leftOrderTypes.Count <= 0) return;
-            OnRemoveStack?.Invoke(true);
+            OnRemoveStack?.Invoke(isLeft);
+            // 硬い矢印判定
+            var arrow =  _leftOrderTypes.Peek()._gameObject.GetComponent<Arrow>();
+            if (1 < arrow._hitPoint)
+            {
+                arrow.SetHitPointText(arrow._hitPoint - 1);
+                // Debug.Log("hard damage " + arrow._hitPoint);
+                return;
+            }
+            // 消す処理
             GameObject.Destroy(_leftOrderTypes.Dequeue()._gameObject);
 			var random = Random.Range(1, 6);
 			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
@@ -156,7 +169,16 @@ public class StackOrder : MonoBehaviour,IGetStack
         else
         {
             if (_rightOrderTypes.Count <= 0) return;
-            OnRemoveStack?.Invoke(false);
+            OnRemoveStack?.Invoke(isLeft);
+            // 硬い矢印判定
+            var arrow =  _rightOrderTypes.Peek()._gameObject.GetComponent<Arrow>();
+            if (1 < arrow._hitPoint)
+            {
+                arrow.SetHitPointText(arrow._hitPoint - 1);
+                // Debug.Log("hard damage " + arrow._hitPoint);
+                return;
+            }
+            // 消す処理
             GameObject.Destroy(_rightOrderTypes.Dequeue()._gameObject);
 			var random = Random.Range(1, 6);
 			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
@@ -164,7 +186,7 @@ public class StackOrder : MonoBehaviour,IGetStack
 		}
     }
 
-    public void OrderInstance(OrderType orderType,bool isLeft,float Offset = 0)
+    public void OrderInstance(OrderType orderType,bool isLeft, int count)
     {
         OrderObject orderObject = new OrderObject();
         orderObject._orderType = orderType;
@@ -185,16 +207,21 @@ public class StackOrder : MonoBehaviour,IGetStack
                 break;
         }
 
+        if (1 < count && orderType != OrderType.NULL)
+        {
+            orderObject._gameObject.GetComponent<Arrow>().SetHitPointText(count);
+        }
+
         if (isLeft)
         {
-            orderObject._gameObject.transform.position = _leftSpawn.position + new Vector3(0,Offset,0);
+            orderObject._gameObject.transform.position = _leftSpawn.position;
             orderObject._gameObject.transform.rotation = _leftSpawn.rotation;
             orderObject._gameObject.SetActive(true);
             _leftOrderTypes.Enqueue(orderObject);
         }
         else
         {
-            orderObject._gameObject.transform.position = _rightSpawn.position + new Vector3(0, Offset, 0);
+            orderObject._gameObject.transform.position = _rightSpawn.position;
             orderObject._gameObject.transform.rotation = _rightSpawn.rotation;
             orderObject._gameObject.SetActive(true);
             _rightOrderTypes.Enqueue(orderObject);
