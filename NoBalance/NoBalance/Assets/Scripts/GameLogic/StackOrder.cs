@@ -7,7 +7,8 @@ public enum OrderType
     Up,
     Down,
     Right,
-    Left
+    Left,
+    NULL
 }
 
 public interface IGetStack
@@ -73,12 +74,15 @@ public class StackOrder : MonoBehaviour,IGetStack
 
     public OrderType GetStack(bool isleft)
     {
+
         if (isleft)
         {
+            if (_leftOrderTypes.Count <= 0) return OrderType.NULL;
             return _leftOrderTypes.Peek()._orderType;
         }
         else
         {
+            if (_rightOrderTypes.Count <= 0) return OrderType.NULL;
             return _rightOrderTypes.Peek()._orderType;
         }
     }
@@ -87,10 +91,12 @@ public class StackOrder : MonoBehaviour,IGetStack
     {
         if (isLeft)
         {
+            if (_leftOrderTypes.Count <= 0) return;
             GameObject.Destroy(_leftOrderTypes.Pop()._gameObject);
         }
         else
         {
+            if (_rightOrderTypes.Count <= 0) return;
             GameObject.Destroy(_rightOrderTypes.Pop()._gameObject);
         }
     }
@@ -121,7 +127,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             orderObject._gameObject.transform.position = _leftSpawn.position;
             orderObject._gameObject.transform.rotation = _leftSpawn.rotation;
             orderObject._gameObject.SetActive(true);
-            orderObject._gameObject.AddComponent<Rigidbody>();
             _leftOrderTypes.Push(orderObject);
         }
         else
@@ -129,7 +134,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             orderObject._gameObject.transform.position = _rightSpawn.position;
             orderObject._gameObject.transform.rotation = _rightSpawn.rotation;
             orderObject._gameObject.SetActive(true);
-            orderObject._gameObject.AddComponent<Rigidbody>();
             _rightOrderTypes.Push(orderObject);
         }  
     }
