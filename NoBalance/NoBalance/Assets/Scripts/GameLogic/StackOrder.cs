@@ -150,8 +150,14 @@ public class StackOrder : MonoBehaviour,IGetStack
     {
         if (isLeft)
         {
+            // 積まれていなければ何もしない
             if (_leftOrderTypes.Count <= 0) return;
+            // スコアは硬くても一撃ごとに入れる
             OnRemoveStack?.Invoke(isLeft);
+            // SEは硬くても一撃ごとに入れる
+			var random = Random.Range(1, 6);
+			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
+			seObj.Play();
             // 硬い矢印判定
             var arrow =  _leftOrderTypes.Peek()._gameObject.GetComponent<Arrow>();
             if (1 < arrow._hitPoint)
@@ -162,14 +168,17 @@ public class StackOrder : MonoBehaviour,IGetStack
             }
             // 消す処理
             GameObject.Destroy(_leftOrderTypes.Dequeue()._gameObject);
-			var random = Random.Range(1, 6);
-			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
-			seObj.Play();
         }
         else
         {
+            // 積まれていなければ何もしない
             if (_rightOrderTypes.Count <= 0) return;
+            // スコアは硬くても一撃ごとに入れる
             OnRemoveStack?.Invoke(isLeft);
+            // SEは硬くても一撃ごとに入れる
+			var random = Random.Range(1, 6);
+			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
+			seObj.Play();
             // 硬い矢印判定
             var arrow =  _rightOrderTypes.Peek()._gameObject.GetComponent<Arrow>();
             if (1 < arrow._hitPoint)
@@ -180,9 +189,6 @@ public class StackOrder : MonoBehaviour,IGetStack
             }
             // 消す処理
             GameObject.Destroy(_rightOrderTypes.Dequeue()._gameObject);
-			var random = Random.Range(1, 6);
-			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
-			seObj.Play();
 		}
     }
 
