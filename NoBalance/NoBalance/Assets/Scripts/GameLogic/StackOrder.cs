@@ -15,6 +15,7 @@ public interface IGetStack
 {
     OrderType GetStack(bool isLeft);
     void Remove(bool isLeft);
+    void OrderInstance(OrderType orderType, bool isLeft);
 }
 
 public class OrderObject
@@ -78,7 +79,8 @@ public class StackOrder : MonoBehaviour,IGetStack
         if (isleft)
         {
             if (_leftOrderTypes.Count <= 0) return OrderType.NULL;
-            return _leftOrderTypes.Peek()._orderType;
+            OrderObject oo =   _leftOrderTypes.Peek();
+            return oo._orderType;
         }
         else
         {
@@ -101,7 +103,7 @@ public class StackOrder : MonoBehaviour,IGetStack
         }
     }
 
-    private void OrderInstance(OrderType orderType,bool isLeft)
+    public void OrderInstance(OrderType orderType,bool isLeft)
     {
         OrderObject orderObject = new OrderObject();
         orderObject._orderType = orderType;
