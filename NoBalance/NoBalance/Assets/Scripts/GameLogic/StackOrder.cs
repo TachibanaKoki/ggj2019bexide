@@ -26,8 +26,8 @@ public class OrderObject
 
 public class StackOrder : MonoBehaviour,IGetStack
 {
-    private Stack<OrderObject> _rightOrderTypes  = new Stack<OrderObject>();
-    private Stack<OrderObject> _leftOrderTypes  = new Stack<OrderObject>();
+    private Queue<OrderObject> _rightOrderTypes  = new Queue<OrderObject>();
+    private Queue<OrderObject> _leftOrderTypes  = new Queue<OrderObject>();
 
     [SerializeField]
     private Transform _leftSpawn;
@@ -92,12 +92,12 @@ public class StackOrder : MonoBehaviour,IGetStack
         if (isLeft)
         {
             if (_leftOrderTypes.Count <= 0) return;
-            GameObject.Destroy(_leftOrderTypes.Pop()._gameObject);
+            GameObject.Destroy(_leftOrderTypes.Dequeue()._gameObject);
         }
         else
         {
             if (_rightOrderTypes.Count <= 0) return;
-            GameObject.Destroy(_rightOrderTypes.Pop()._gameObject);
+            GameObject.Destroy(_rightOrderTypes.Dequeue()._gameObject);
         }
     }
 
@@ -127,14 +127,14 @@ public class StackOrder : MonoBehaviour,IGetStack
             orderObject._gameObject.transform.position = _leftSpawn.position;
             orderObject._gameObject.transform.rotation = _leftSpawn.rotation;
             orderObject._gameObject.SetActive(true);
-            _leftOrderTypes.Push(orderObject);
+            _leftOrderTypes.Enqueue(orderObject);
         }
         else
         {
             orderObject._gameObject.transform.position = _rightSpawn.position;
             orderObject._gameObject.transform.rotation = _rightSpawn.rotation;
             orderObject._gameObject.SetActive(true);
-            _rightOrderTypes.Push(orderObject);
+            _rightOrderTypes.Enqueue(orderObject);
         }  
     }
 }
