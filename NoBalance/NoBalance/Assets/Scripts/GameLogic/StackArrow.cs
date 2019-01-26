@@ -10,19 +10,39 @@ public enum OrderType
     Left
 }
 
-
-public class StackOrder : MonoBehaviour
+public interface IGetStack
 {
-    public List<OrderType> _rightOrderTypes { get; private set; } = new List<OrderType>();
-    public List<OrderType> _leftOrderTypes { get; private set; } = new List<OrderType>();
+    void GetStackLeft();
+    void GetStackRight();
+    void RemoveLeft();
+    void RemoveRight();
+}
 
-    // Start is called before the first frame update
+
+public class StackOrder : MonoBehaviour,IGetStack
+{
+    private Stack<OrderType> _rightOrderTypes  = new Stack<OrderType>();
+    private Stack<OrderType> _leftOrderTypes  = new Stack<OrderType>();
+
+    [SerializeField]
+    private GameObject _upArrow;
+    [SerializeField]
+    private GameObject _downArrow;
+    [SerializeField]
+    private GameObject _RightArrow;
+    [SerializeField]
+    private GameObject _leftArrow;
+
+    void GetStackLeft() { }
+    void GetStackRight() { }
+    void RemoveLeft() { }
+    void RemoveRight() { }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
