@@ -15,7 +15,7 @@ public interface IGetStack
 {
     OrderType GetStack(bool isLeft);
     void Remove(bool isLeft);
-    void OrderInstance(OrderType orderType, bool isLeft);
+    void OrderInstance(OrderType orderType, bool isLeft,float offset);
 }
 
 public class OrderObject
@@ -117,7 +117,7 @@ public class StackOrder : MonoBehaviour,IGetStack
         }
     }
 
-    public void OrderInstance(OrderType orderType,bool isLeft,float Offset)
+    public void OrderInstance(OrderType orderType,bool isLeft,float Offset = 0)
     {
         OrderObject orderObject = new OrderObject();
         orderObject._orderType = orderType;
