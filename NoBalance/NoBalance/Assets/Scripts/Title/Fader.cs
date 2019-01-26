@@ -12,7 +12,7 @@ public class Fader : MonoBehaviour
 	private static Image fadeImage;
 
 	//フェード用Imageの透明度
-	private static float alpha = 1.0f;
+	private static float alpha = 1.2f;
 
 	//フェードインアウトのフラグ
 	public static bool isFadeIn = false;
