@@ -70,6 +70,7 @@ public class StackOrder : MonoBehaviour,IGetStack
     {
         StartCoroutine(LeftLaneInstance());
         StartCoroutine(RightLaneInstance());
+
         StartCoroutine(LevelUp());
     }
 
@@ -161,7 +162,8 @@ public class StackOrder : MonoBehaviour,IGetStack
             }
             // 消す処理
             GameObject.Destroy(_leftOrderTypes.Dequeue()._gameObject);
-			var seObj = GameObject.Find("SE").GetComponent<AudioSource>();
+			var random = Random.Range(1, 6);
+			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
 			seObj.Play();
         }
         else
@@ -178,7 +180,8 @@ public class StackOrder : MonoBehaviour,IGetStack
             }
             // 消す処理
             GameObject.Destroy(_rightOrderTypes.Dequeue()._gameObject);
-			var seObj = GameObject.Find("SE").GetComponent<AudioSource>();
+			var random = Random.Range(1, 6);
+			var seObj = GameObject.Find("SE" + random).GetComponent<AudioSource>();
 			seObj.Play();
 		}
     }
