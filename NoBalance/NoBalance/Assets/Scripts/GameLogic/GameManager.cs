@@ -62,7 +62,8 @@ public class GameManager : MonoBehaviour
                     PlayerPrefs.SetInt("HighScore",_Score);
                 }
                 Debug.Log("Score:" + _Score);
-				SceneManager.LoadScene("Title");
+				//SceneManager.LoadScene("Title");
+				Fader.FadeOut(2);
             }
         }
     }
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
 			m_BGM.Stop();
 			if (clear)
 			{
-				_gameOverDemoTimer = 15.0f;
+				_gameOverDemoTimer = 20.0f;
 				// éüÇ…ñ¬ÇÁÇ∑BGMÇÃê›íË
 				m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();
 			}
