@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
 
     public void MissPenalty(bool isLeft)
     {
-        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, -2.0f);
-        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, -1.0f);
-        _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, 0.0f);
+        _orderStack.SetPenalty(isLeft);
+        // _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, -2.0f);
+        // _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, -1.0f);
+        // _orderStack.OrderInstance((OrderType)Random.Range(0, 4), isLeft, 0.0f);
     }
 }
