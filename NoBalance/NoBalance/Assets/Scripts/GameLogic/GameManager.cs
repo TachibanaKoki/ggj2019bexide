@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     private int _Score = 0;
     private int _HighScores = 0;
 
+	private AudioSource m_BGM;
+	private bool m_Clear;
+
     public void Start()
     {
         _inputManager.MissEvent += this.MissPenalty;
@@ -30,7 +33,11 @@ public class GameManager : MonoBehaviour
         _orderStack.OnRemoveStack += this.RemoveStack;
         _HighScores = PlayerPrefs.GetInt("HighScore",0);
         _scoreText.text = "SCORE:"+_Score;
-    }
+
+		var random = Random.Range(0, 100) % 3 + 1;
+		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
+		m_BGM.Play();
+	}
 
     public void Update()
     {
@@ -39,8 +46,7 @@ public class GameManager : MonoBehaviour
 
         if (_playTime <= _Timer)
         {
-            //todo tmp
-            GameOver();
+			GameOver(true);
         }
 
         if (0.0f < _gameOverDemoTimer)
@@ -61,6 +67,8 @@ public class GameManager : MonoBehaviour
 #else
                 SceneManager.LoadScene("Title");
 #endif
+				Fader.FadeOut(2);
+
             }
         }
     }
@@ -76,15 +84,30 @@ public class GameManager : MonoBehaviour
         _orderStack.SetPenalty(isLeft);
     }
 
-    public void GameOver()
+    public void GameOver(bool clear)
     {
         // tmp
         Time.timeScale = 0.0f;
-        if (_gameOverDemoTimer <= 0.0f)
-        {
-            _gameOverDemoTimer = 1.0f;
-        }
-    }
+		if (_gameOverDemoTimer <= 0.0f)
+		{
 
-    float _gameOverDemoTimer = 0.0f;
+			m_BGM.Stop();
+			if (clear)
+			{
+				_gameOverDemoTimer = 20.0f;
+				// クリア時に鳴らすBGM
+				m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();
+			}
+			else
+			{
+				_gameOverDemoTimer = 35.0f;
+				// ゲームオーバー時に鳴らすBGM
+				m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
+			}
+			m_BGM.Play();
+
+		}
+	}
+
+	float _gameOverDemoTimer = 0.0f;
 }

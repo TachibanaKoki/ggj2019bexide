@@ -1,17 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class GameOverCollider : MonoBehaviour
 {
-    public static  UnityAction GameOverEvent;
+    public static Action<bool> GameOverEvent;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Arrow")
         {
-            GameOverEvent?.Invoke();
+            GameOverEvent?.Invoke(false);
         }
     }
 }
