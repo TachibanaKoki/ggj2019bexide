@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
         m_BGM.Play();
         Time.timeScale = 0.0f;
-    }
+	}
 
     public void Update()
     {
@@ -83,7 +83,8 @@ public class GameManager : MonoBehaviour
         if (0.0f < _gameOverDemoTimer)
         {
             _gameOverDemoTimer -= Time.fixedDeltaTime;
-            if (_gameOverDemoTimer <= 0.0f)
+			Debug.Log(Time.fixedDeltaTime);
+			if (_gameOverDemoTimer <= 0.0f)
             {
                 // tmp
                 Time.timeScale = 1.0f;
@@ -91,10 +92,10 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.Log("NEW RECORED:" + _Score);
                     PlayerPrefs.SetInt("HighScore", _Score);
-                }
-                Debug.Log("Score:" + _Score);
-                //SceneManager.LoadScene("Title");
-                Fader.FadeOut(2);
+                }			
+				Debug.Log("Score:" + _Score);
+				//SceneManager.LoadScene("Title");
+				Fader.FadeOut(0);
             }
         }
     }
@@ -113,34 +114,37 @@ public class GameManager : MonoBehaviour
     public void GameOver(bool clear)
     {
 
-        if (m_Clear)
-        {
-            return;
-        }
-
-        m_Clear = true;
-        // tmp
-        Time.timeScale = 0.0f;
-        if (_gameOverDemoTimer <= 0.0f)
-        {
-
-            m_BGM.Stop();
-            if (clear)
-            {
-                _gameOverDemoTimer = 20.0f;
-                // クリア時に鳴らすBGM
-                m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();
-            }
-            else
-            {
-                _gameOverDemoTimer = 35.0f;
-                // ゲームオーバー時に鳴らすBGM
-                m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
-            }
-            m_BGM.Play();
-
-        }
-    }
-
     float _gameOverDemoTimer = 0.0f;
+
+		if(m_Clear)
+		{
+			return;
+		}
+
+		m_Clear = true;
+		// tmp
+		Time.timeScale = 0.0f;
+		if (_gameOverDemoTimer <= 0.0f)
+		{
+
+			m_BGM.Stop();
+			if (clear)
+			{
+				_gameOverDemoTimer = 3.0f;
+				// クリア時に鳴らすBGM
+				m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();
+			}
+			else
+			{
+				_gameOverDemoTimer = 5.0f;
+				// ゲームオーバー時に鳴らすBGM
+				m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
+			}
+			m_BGM.Play();
+
+		}
+	}
+
+	float _gameOverDemoTimer = 0.0f;
+
 }
