@@ -11,8 +11,11 @@ public class ResultManager : MonoBehaviour
 	private GameObject _sucess;
 	[SerializeField]
 	private GameObject _failed;
+	[SerializeField]
 	private GameObject _resultPanel;
+	[SerializeField]
 	private Text m_scoreText;
+	[SerializeField]
 	private Text m_HiscoreText;
 
 	private int m_score;
@@ -35,9 +38,6 @@ public class ResultManager : MonoBehaviour
 	void Start()
 	{
 		_resultPanel.SetActive(false);
-		_resultPanel = transform.Find("ResultPanel").gameObject;
-		m_scoreText = transform.Find("Score").GetComponent<Text>();
-		m_HiscoreText = transform.Find("HiScore").GetComponent<Text>();
 
 		m_score = 0;
 	}

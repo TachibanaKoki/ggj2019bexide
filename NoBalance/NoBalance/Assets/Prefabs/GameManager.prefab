@@ -249,6 +249,11 @@ PrefabInstance:
       propertyPath: _rightSlider
       value: 
       objectReference: {fileID: 8609951978274612192}
+    - target: {fileID: 2811271509560876936, guid: 583dab5fa7e41e041a9fd65208b49370,
+        type: 3}
+      propertyPath: _resultManager
+      value: 
+      objectReference: {fileID: 3999934120088926364}
     - target: {fileID: 3030607140036888038, guid: 583dab5fa7e41e041a9fd65208b49370,
         type: 3}
       propertyPath: m_FillRect
@@ -322,3 +327,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6733533006596908550}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3999934120088926364 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7705885961071025818, guid: 583dab5fa7e41e041a9fd65208b49370,
+    type: 3}
+  m_PrefabInstance: {fileID: 6733533006596908550}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e893672997bfee1478858a2e97df9b02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
