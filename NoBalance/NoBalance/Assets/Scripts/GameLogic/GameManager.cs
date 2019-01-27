@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 		m_BGM.Play();
 
         _startWait = true;
-
+        
         Time.timeScale = 0.0f;
 	}
 
