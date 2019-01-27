@@ -7,7 +7,11 @@ public class ResultManager : MonoBehaviour
 {
 
 	// タイトルイメージ
-	private Image m_titleImage;
+	[SerializeField]
+	private GameObject _sucess;
+	[SerializeField]
+	private GameObject _failed;
+	private GameObject _resultPanel;
 	private Text m_scoreText;
 	private Text m_HiscoreText;
 
@@ -15,19 +19,27 @@ public class ResultManager : MonoBehaviour
 	private float m_colorTimer;
 
 
+	// Start Result
+	public void StartResult(bool isSuccess, int score, int highScore)
+	{
+		_resultPanel.SetActive(true);
+		m_HiscoreText.text = "HighScore : " + highScore;
 
-	// Start is called before the first frame update
+		m_score = score;
+		m_scoreText.text = "Score : " + m_score;
+
+		_sucess.SetActive(isSuccess);
+		_failed.SetActive(!isSuccess);
+	}
+
 	void Start()
 	{
-		m_titleImage = transform.Find("Image").GetComponent<Image>();
+		_resultPanel.SetActive(false);
+		_resultPanel = transform.Find("ResultPanel").gameObject;
 		m_scoreText = transform.Find("Score").GetComponent<Text>();
 		m_HiscoreText = transform.Find("HiScore").GetComponent<Text>();
 
 		m_score = 0;
-
-		Fader.FadeIn();
-
-		
 	}
 
 	// Update is called once per frame
@@ -40,15 +52,8 @@ public class ResultManager : MonoBehaviour
 	{
 		m_colorTimer += Time.deltaTime;
 
-		if(m_score != 100)
-		{
-			m_score++;
-		}
-
-		m_scoreText.text = "Score:" + m_score;
-
 		// タッチチェック
-		if (m_score == 100 && Input.GetKeyDown(KeyCode.Space))
+		if (100 <= m_colorTimer && Input.GetKeyDown(KeyCode.Space))
 		{
 			Fader.FadeOut(0);
 		}
