@@ -29,8 +29,8 @@ public class StackOrder : MonoBehaviour,IGetStack
 {
     public UnityAction<bool> OnRemoveStack;
 
-    private Queue<OrderObject> _rightOrderTypes  = new Queue<OrderObject>();
-    private Queue<OrderObject> _leftOrderTypes  = new Queue<OrderObject>();
+    public Queue<OrderObject> _rightOrderTypes  = new Queue<OrderObject>();
+    public Queue<OrderObject> _leftOrderTypes  = new Queue<OrderObject>();
 
     [SerializeField]
     private Transform _leftSpawn;
