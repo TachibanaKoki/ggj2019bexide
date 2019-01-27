@@ -25,7 +25,7 @@ public class Arrow : MonoBehaviour
     private void Update()
     {
         Ray ray = new Ray(transform.position,Vector3.down);
-        if(Physics.Raycast(ray,1.1f))
+        if(Physics.Raycast(ray,1.9f))
         {
             GetComponent<Collider>().enabled = true;
             _isGround = true;
