@@ -27,26 +27,34 @@ public class GameManager : MonoBehaviour
     private int _Score = 0;
     private int _HighScores = 0;
 
-    private AudioSource m_BGM;
-    private bool m_Clear;
+
+	private AudioSource m_BGM;
+	private bool m_BGMEnd;
+	private bool m_Clear;
 
     private float startTime = 5.0f;
     public static  bool _startWait = true;
     private float startTimer = 0;
+
 
     public void Start()
     {
         _inputManager.MissEvent += this.MissPenalty;
         GameOverCollider.GameOverEvent += this.GameOver;
         _orderStack.OnRemoveStack += this.RemoveStack;
-        _HighScores = PlayerPrefs.GetInt("HighScore", 0);
-        _scoreText.text = "SCORE:" + _Score;
+
+        _HighScores = PlayerPrefs.GetInt("HighScore",0);
+        _scoreText.text = "SCORE:"+_Score;
+
+
+		m_Clear = false;
+		m_BGMEnd = false;
+		var random = Random.Range(0, 100) % 3 + 1;
+		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
+		m_BGM.Play();
+
         _startWait = true;
-        // �N���A�A�Q�[���I�[�o�[���s��ꂽ���ǂ����̔���
-        m_Clear = false;
-        var random = Random.Range(0, 100) % 3 + 1;
-        m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
-        m_BGM.Play();
+
         Time.timeScale = 0.0f;
 	}
 
@@ -85,29 +93,32 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (0.0f < _gameOverDemoTimer)
+        if (m_BGM.isPlaying)
         {
             _gameOverDemoTimer -= Time.fixedDeltaTime;
-			Debug.Log(Time.fixedDeltaTime);
-			if (_gameOverDemoTimer <= 0.0f)
+        }
+        else if (!m_BGM.isPlaying)
+        {
+            Debug.Log(Time.fixedDeltaTime);
+            if (_gameOverDemoTimer <= 0.0f)
             {
                 // tmp
                 Time.timeScale = 1.0f;
                 if (_HighScores < _Score)
                 {
-                    Debug.Log("NEW RECORED:"+_Score);
-                    PlayerPrefs.SetInt("HighScore",_Score);
+                    Debug.Log("NEW RECORED:" + _Score);
+                    PlayerPrefs.SetInt("HighScore", _Score);
                 }
                 Debug.Log("Score:" + _Score);
-#if VR_MODE
-                SceneManager.LoadScene("Title_VR");
-#else
-                SceneManager.LoadScene("Title");
-#endif	
-				Fader.FadeOut(0);
+                if (m_BGMEnd)
+                {
+                    m_BGMEnd = false;
+                    Fader.FadeOut(0);
+                }
             }
         }
-    }
+
+	}
 
     public void RemoveStack(bool isLeft)
     {
@@ -118,12 +129,14 @@ public class GameManager : MonoBehaviour
     public void MissPenalty(bool isLeft)
     {
         _orderStack.SetPenalty(isLeft);
+		var missSE = GameObject.Find("Miss").GetComponent<AudioSource>();
+		missSE.Play();
     }
 
     public void GameOver(bool clear)
     {
 
-    float _gameOverDemoTimer = 0.0f;
+    //float _gameOverDemoTimer = 0.0f;
 
 		if(m_Clear)
 		{
@@ -149,6 +162,7 @@ public class GameManager : MonoBehaviour
 				// ゲームオーバー時に鳴らすBGM
 				m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
 			}
+			m_BGMEnd = true;
 			m_BGM.Play();
 
 		}
