@@ -45,12 +45,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftSpawn: {fileID: 0}
   _rightSpawn: {fileID: 0}
-  _leftInstanceInterval: 1.8
-  _rightInstanceInterval: 1.8
+  _leftInstanceInterval: 1.9
+  _rightInstanceInterval: 1.9
   _levelUpInterval: 10
   _levelUpSpeedUpTime: 0.2
   _penaltyNum: 3
-  _penaltyInterval: 0.8
+  _penaltyInterval: 0.7
   _hardAppearPercent: 30
   _upArrow: {fileID: 397941453625721064, guid: 80404b932550c864a9989bff7b6d8f49, type: 3}
   _downArrow: {fileID: 5907429027724317835, guid: 9f6b845b68d96b546a286bf643b5e050,
@@ -159,6 +159,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: 7f37b3e688ded3646b145bd6f5923042,
         type: 3}
+    - target: {fileID: 8425823689849784363, guid: 583dab5fa7e41e041a9fd65208b49370,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 695909101529988578, guid: 583dab5fa7e41e041a9fd65208b49370,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -259,6 +264,11 @@ PrefabInstance:
       propertyPath: m_FillRect
       value: 
       objectReference: {fileID: 9007682293325476118}
+    - target: {fileID: 2338467468364617488, guid: 583dab5fa7e41e041a9fd65208b49370,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 583dab5fa7e41e041a9fd65208b49370, type: 3}
 --- !u!4 &6114213960917212132 stripped

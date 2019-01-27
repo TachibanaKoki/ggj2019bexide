@@ -23,10 +23,17 @@ public class ResultManager : MonoBehaviour
 
 
 	// Start Result
-	public void StartResult(bool isSuccess, int score, int highScore)
+	public void StartResult(bool isSuccess, int score, int oldHighScore)
 	{
 		_resultPanel.SetActive(true);
-		m_HiscoreText.text = "HighScore : " + highScore;
+		if (score < oldHighScore)
+        {
+            m_HiscoreText.text = "HighScore : " + oldHighScore;
+        }
+		else
+		{
+            m_HiscoreText.text = "HighScore : " + Mathf.Max(score, oldHighScore) + "\n New Record!";
+		}
 
 		m_score = score;
 		m_scoreText.text = "Score : " + m_score;

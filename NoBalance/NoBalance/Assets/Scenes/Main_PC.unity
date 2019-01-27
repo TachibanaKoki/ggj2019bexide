@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.090301655, g: 0.113048896, b: 0.15354867, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.09030184, g: 0.113049164, b: 0.1535492, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -196,15 +196,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3844064504811124372, guid: 8280696c18fef794c919e0f8142043ee,
+    - target: {fileID: 2079196741200162923, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
-      propertyPath: m_Name
-      value: GameManager
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375466319301139924, guid: 8280696c18fef794c919e0f8142043ee,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 975164956114166598, guid: 8280696c18fef794c919e0f8142043ee,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7689163342766045013, guid: 8280696c18fef794c919e0f8142043ee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3084392960634435027, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844064504811124372, guid: 8280696c18fef794c919e0f8142043ee,
+        type: 3}
+      propertyPath: m_Name
+      value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 4958458205306009417, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
@@ -278,16 +298,20 @@ PrefabInstance:
       objectReference: {fileID: 1845305886}
     - target: {fileID: 1463443770, guid: 8280696c18fef794c919e0f8142043ee, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 600
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 1463443770, guid: 8280696c18fef794c919e0f8142043ee, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 400
       objectReference: {fileID: 0}
+    - target: {fileID: 1463443770, guid: 8280696c18fef794c919e0f8142043ee, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 450
+      objectReference: {fileID: 0}
     - target: {fileID: 4372876604948034377, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -550
+      value: -750
       objectReference: {fileID: 0}
     - target: {fileID: 4372876604948034377, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
@@ -302,7 +326,7 @@ PrefabInstance:
     - target: {fileID: 6323823877188263395, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 780
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 4539918364774010532, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
@@ -312,7 +336,7 @@ PrefabInstance:
     - target: {fileID: 4539918364774010532, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -750
+      value: -820
       objectReference: {fileID: 0}
     - target: {fileID: 2998511793862798893, guid: 8280696c18fef794c919e0f8142043ee,
         type: 3}
@@ -323,26 +347,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 975164956114166598, guid: 8280696c18fef794c919e0f8142043ee,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7689163342766045013, guid: 8280696c18fef794c919e0f8142043ee,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7375466319301139924, guid: 8280696c18fef794c919e0f8142043ee,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2079196741200162923, guid: 8280696c18fef794c919e0f8142043ee,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8280696c18fef794c919e0f8142043ee, type: 3}
