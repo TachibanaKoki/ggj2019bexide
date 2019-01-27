@@ -17,48 +17,83 @@ public class GameManager : MonoBehaviour
     Text _playTimeText;
     [SerializeField]
     private float _playTime = 60.0f;
+    [SerializeField]
+    Slider _leftSlider;
+    [SerializeField]
+    Slider _rightSlider;
 
     private float _Timer = 0.0f;
 
     private int _Score = 0;
     private int _HighScores = 0;
 
-	private AudioSource m_BGM;
-	private bool m_Clear;
+    private AudioSource m_BGM;
+    private bool m_Clear;
+
+    private float startTime = 5.0f;
+    public static  bool _startWait = true;
+    private float startTimer = 0;
 
     public void Start()
     {
         _inputManager.MissEvent += this.MissPenalty;
         GameOverCollider.GameOverEvent += this.GameOver;
         _orderStack.OnRemoveStack += this.RemoveStack;
-        _HighScores = PlayerPrefs.GetInt("HighScore",0);
-        _scoreText.text = "SCORE:"+_Score;
-
-		// ƒNƒŠƒAAƒQ[ƒ€ƒI[ƒo[‚ªs‚í‚ê‚½‚©‚Ç‚¤‚©‚Ì”»’è
-		m_Clear = false;
-		var random = Random.Range(0, 100) % 3 + 1;
-		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
-		m_BGM.Play();
+        _HighScores = PlayerPrefs.GetInt("HighScore", 0);
+        _scoreText.text = "SCORE:" + _Score;
+        _startWait = true;
+        // ï¿½Nï¿½ï¿½ï¿½Aï¿½Aï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½sï¿½ï¿½ê‚½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½Ì”ï¿½ï¿½ï¿½
+        m_Clear = false;
+        var random = Random.Range(0, 100) % 3 + 1;
+        m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
+        m_BGM.Play();
+        Time.timeScale = 0.0f;
 	}
 
     public void Update()
     {
-        _Timer += Time.deltaTime;
-        _playTimeText.text =  Mathf.Max(0, Mathf.Floor(_playTime - _Timer)).ToString();
-
-        if (_playTime <= _Timer)
+        _rightSlider.value = _orderStack._rightOrderTypes.Count;
+        _leftSlider.value = _orderStack._leftOrderTypes.Count;
+        if (!_startWait)
         {
-			GameOver(true);
+            _Timer += Time.deltaTime;
+            _playTimeText.text = Mathf.Max(0, Mathf.Floor(_playTime - _Timer)).ToString();
+
+            if (_playTime <= _Timer)
+            {
+                GameOver(true);
+            }
+        }
+        else
+        {
+            startTimer += Time.unscaledDeltaTime;
+            float t = Mathf.Floor(startTime - startTimer);
+            if (t > 0)
+            {
+                _playTimeText.text = t.ToString();
+            }
+            else
+            {
+                _playTimeText.text = "START!";
+            }
+
+            if (startTimer >= startTime)
+            {
+                _startWait = false;
+                Time.timeScale = 1.0f;
+            }
+
         }
 
         if (0.0f < _gameOverDemoTimer)
         {
             _gameOverDemoTimer -= Time.fixedDeltaTime;
-            if (_gameOverDemoTimer <= 0.0f)
+			Debug.Log(Time.fixedDeltaTime);
+			if (_gameOverDemoTimer <= 0.0f)
             {
                 // tmp
                 Time.timeScale = 1.0f;
-                if(_HighScores<_Score)
+                if (_HighScores < _Score)
                 {
                     Debug.Log("NEW RECORED:"+_Score);
                     PlayerPrefs.SetInt("HighScore",_Score);
@@ -68,9 +103,8 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("Title_VR");
 #else
                 SceneManager.LoadScene("Title");
-#endif
-				Fader.FadeOut(2);
-
+#endif	
+				Fader.FadeOut(0);
             }
         }
     }
@@ -89,6 +123,8 @@ public class GameManager : MonoBehaviour
     public void GameOver(bool clear)
     {
 
+    float _gameOverDemoTimer = 0.0f;
+
 		if(m_Clear)
 		{
 			return;
@@ -103,13 +139,13 @@ public class GameManager : MonoBehaviour
 			m_BGM.Stop();
 			if (clear)
 			{
-				_gameOverDemoTimer = 20.0f;
+				_gameOverDemoTimer = 3.0f;
 				// ã‚¯ãƒªã‚¢æ™‚ã«é³´ã‚‰ã™BGM
 				m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();
 			}
 			else
 			{
-				_gameOverDemoTimer = 35.0f;
+				_gameOverDemoTimer = 5.0f;
 				// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã«é³´ã‚‰ã™BGM
 				m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
 			}
@@ -119,4 +155,5 @@ public class GameManager : MonoBehaviour
 	}
 
 	float _gameOverDemoTimer = 0.0f;
+
 }
