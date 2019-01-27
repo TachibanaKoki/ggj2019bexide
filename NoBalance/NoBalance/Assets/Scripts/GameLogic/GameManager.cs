@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         _HighScores = PlayerPrefs.GetInt("HighScore",0);
         _scoreText.text = "SCORE:"+_Score;
 
-		// ƒNƒŠƒAAƒQ[ƒ€ƒI[ƒo[‚ªs‚í‚ê‚½‚©‚Ç‚¤‚©‚Ì”»’è
+		// ï¿½Nï¿½ï¿½ï¿½Aï¿½Aï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½sï¿½ï¿½ê‚½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½Ì”ï¿½ï¿½ï¿½
 		m_Clear = false;
 		var random = Random.Range(0, 100) % 3 + 1;
 		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
@@ -54,7 +54,8 @@ public class GameManager : MonoBehaviour
         if (0.0f < _gameOverDemoTimer)
         {
             _gameOverDemoTimer -= Time.fixedDeltaTime;
-            if (_gameOverDemoTimer <= 0.0f)
+			Debug.Log(Time.fixedDeltaTime);
+			if (_gameOverDemoTimer <= 0.0f)
             {
                 // tmp
                 Time.timeScale = 1.0f;
@@ -63,9 +64,10 @@ public class GameManager : MonoBehaviour
                     Debug.Log("NEW RECORED:"+_Score);
                     PlayerPrefs.SetInt("HighScore",_Score);
                 }
-                Debug.Log("Score:" + _Score);
+				
+				Debug.Log("Score:" + _Score);
 				//SceneManager.LoadScene("Title");
-				Fader.FadeOut(2);
+				Fader.FadeOut(0);
             }
         }
     }
@@ -98,13 +100,13 @@ public class GameManager : MonoBehaviour
 			m_BGM.Stop();
 			if (clear)
 			{
-				_gameOverDemoTimer = 20.0f;
+				_gameOverDemoTimer = 3.0f;
 				// ã‚¯ãƒªã‚¢æ™‚ã«é³´ã‚‰ã™BGM
 				m_BGM = GameObject.Find("Success").GetComponent<AudioSource>();
 			}
 			else
 			{
-				_gameOverDemoTimer = 35.0f;
+				_gameOverDemoTimer = 5.0f;
 				// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã«é³´ã‚‰ã™BGM
 				m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
 			}
