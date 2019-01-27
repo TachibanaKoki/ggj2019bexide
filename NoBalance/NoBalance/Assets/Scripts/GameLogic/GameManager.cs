@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private StackOrder _orderStack;
     [SerializeField]
+    private ResultManager _resultManager;
+    [SerializeField]
     Text _scoreText;
     [SerializeField]
     Text _playTimeText;
@@ -165,7 +167,8 @@ public class GameManager : MonoBehaviour
 			m_BGMEnd = true;
 			m_BGM.Play();
 
-		}
+            _resultManager.StartResult(m_Clear, _Score, _HighScores);
+        }
 	}
 
 	float _gameOverDemoTimer = 0.0f;
