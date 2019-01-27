@@ -12,7 +12,7 @@ public class TitleManager : MonoBehaviour
 
 	private float m_colorTimer;
 
-
+	private AudioSource m_TitleCall;
 
 	// Start is called before the first frame update
 	void Start()
@@ -23,6 +23,8 @@ public class TitleManager : MonoBehaviour
 
 		// プラットフォームに合わせてケースわけ？（できるのであれば
 		m_touchText.text = "Press to Start";
+
+		m_TitleCall = this.transform.GetComponent<AudioSource>();
 
 		Fader.FadeIn();
     }
@@ -53,7 +55,7 @@ public class TitleManager : MonoBehaviour
 		}
 
 		// タッチチェック
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.anyKeyDown && !m_TitleCall.isPlaying)
 		{
 			Fader.FadeOut(1);
 		}
