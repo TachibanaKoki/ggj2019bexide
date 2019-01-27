@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     Text _playTimeText;
     [SerializeField]
     private float _playTime = 60.0f;
+    [SerializeField]
+    Slider _leftSlider;
+    [SerializeField]
+    Slider _rightSlider;
 
     private float _Timer = 0.0f;
 
@@ -48,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        _rightSlider.value = _orderStack._rightOrderTypes.Count;
+        _leftSlider.value = _orderStack._leftOrderTypes.Count;
         if (!_startWait)
         {
             _Timer += Time.deltaTime;
@@ -60,7 +66,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
             startTimer += Time.unscaledDeltaTime;
             float t = Mathf.Floor(startTime - startTimer);
             if (t > 0)
