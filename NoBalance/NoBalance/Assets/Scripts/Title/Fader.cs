@@ -59,7 +59,7 @@ public class Fader : MonoBehaviour
 	{
 		if (fadeImage == null) Init();
 		nextScene = n;
-		alpha = 0f;
+		alpha = 0.0f;
 		fadeImage.color = Color.clear;
 		fadeCanvas.enabled = true;
 		isFadeOut = true;
@@ -88,10 +88,11 @@ public class Fader : MonoBehaviour
 		{
 			//経過時間から透明度計算
 			alpha += Time.deltaTime / fadeTime;
-
+			Debug.Log(alpha);
 			//フェードアウト終了判定
 			if (alpha >= 1.0f)
 			{
+				
 				isFadeOut = false;
 				alpha = 1.0f;
 

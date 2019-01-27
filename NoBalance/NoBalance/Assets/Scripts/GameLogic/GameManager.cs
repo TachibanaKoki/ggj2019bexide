@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private int _HighScores = 0;
 
 	private AudioSource m_BGM;
+	private bool m_BGMEnd;
 	private bool m_Clear;
 
     public void Start()
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
 
 		// �N���A�A�Q�[���I�[�o�[���s��ꂽ���ǂ����̔���
 		m_Clear = false;
+		m_BGMEnd = false;
 		var random = Random.Range(0, 100) % 3 + 1;
 		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
 		m_BGM.Play();
@@ -51,26 +53,32 @@ public class GameManager : MonoBehaviour
 			GameOver(true);
         }
 
-        if (0.0f < _gameOverDemoTimer)
-        {
-            _gameOverDemoTimer -= Time.fixedDeltaTime;
+		if (m_BGM.isPlaying)
+		{
+			_gameOverDemoTimer -= Time.fixedDeltaTime;
+		}
+		else if (!m_BGM.isPlaying)
+		{
 			Debug.Log(Time.fixedDeltaTime);
-			if (_gameOverDemoTimer <= 0.0f)
-            {
-                // tmp
-                Time.timeScale = 1.0f;
-                if(_HighScores<_Score)
-                {
-                    Debug.Log("NEW RECORED:"+_Score);
-                    PlayerPrefs.SetInt("HighScore",_Score);
-                }
-				
-				Debug.Log("Score:" + _Score);
-				//SceneManager.LoadScene("Title");
+			// tmp
+			Time.timeScale = 1.0f;
+			if (_HighScores < _Score)
+			{
+				Debug.Log("NEW RECORED:" + _Score);
+				PlayerPrefs.SetInt("HighScore", _Score);
+			}
+
+			Debug.Log("Score:" + _Score);
+			//SceneManager.LoadScene("Title");
+			if(m_BGMEnd)
+			{
+				m_BGMEnd = false;
 				Fader.FadeOut(0);
-            }
-        }
-    }
+			}
+			
+		}
+
+	}
 
     public void RemoveStack(bool isLeft)
     {
@@ -81,6 +89,8 @@ public class GameManager : MonoBehaviour
     public void MissPenalty(bool isLeft)
     {
         _orderStack.SetPenalty(isLeft);
+		var missSE = GameObject.Find("Miss").GetComponent<AudioSource>();
+		missSE.Play();
     }
 
     public void GameOver(bool clear)
@@ -110,6 +120,7 @@ public class GameManager : MonoBehaviour
 				// ゲームオーバー時に鳴らすBGM
 				m_BGM = GameObject.Find("Fail").GetComponent<AudioSource>();
 			}
+			m_BGMEnd = true;
 			m_BGM.Play();
 
 		}
