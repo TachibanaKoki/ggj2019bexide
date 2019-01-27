@@ -26,24 +26,15 @@ public class ViveInput : MonoBehaviour
             return false;
         }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
-        if (position.x <= Mathf.Abs(position.y))
+
+        if(SteamVR_Input._default.inActions.Teleport.GetStateDown(SteamVR_Input_Sources.RightHand))
         {
-            right1 = false;
-            return false;
-        }
-        if(SteamVR_Input._default.inActions.Teleport.GetState(SteamVR_Input_Sources.RightHand))
-        {
-            if(!right1)
-            {
-                right1 = true;
-                return true;
-            }
-            else
+            if (position.x <= Mathf.Abs(position.y))
             {
                 return false;
             }
+            return true;
         }
-        right1 = false;
         return false;
     }
     public static bool GetDownLeft1()
@@ -56,28 +47,17 @@ public class ViveInput : MonoBehaviour
         {
             return false;
         }
-
-
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
-        if (position.x >= -Mathf.Abs(position.y))
-        {
-            left1 = false;
-            return false;
 
-        }
-        if ( SteamVR_Input._default.inActions.Teleport.GetState(SteamVR_Input_Sources.RightHand))
+        if ( SteamVR_Input._default.inActions.Teleport.GetStateDown(SteamVR_Input_Sources.RightHand))
         {
-            if (!left1)
-            {
-                left1 = true;
-                return true;
-            }
-            else
+            if (position.x >= -Mathf.Abs(position.y))
             {
                 return false;
+
             }
+            return true;
         }
-        left1 = false;
         return false;
     }
     public static bool GetDownUp1()
@@ -91,24 +71,15 @@ public class ViveInput : MonoBehaviour
             return false;
         }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
-        if (position.y <= Mathf.Abs(position.x))
+
+        if (SteamVR_Input._default.inActions.Teleport.GetStateDown(SteamVR_Input_Sources.RightHand))
         {
-            up1 = false;
-            return false;
-        }
-        if (SteamVR_Input._default.inActions.Teleport.GetState(SteamVR_Input_Sources.RightHand))
-        {
-            if (!up1)
-            {
-                up1 = true;
-                return true;
-            }
-            else
+            if (position.y <= Mathf.Abs(position.x))
             {
                 return false;
             }
+            return true;
         }
-        up1 = false;
         return false;
     }
     public static bool GetDownDown1()
@@ -122,24 +93,15 @@ public class ViveInput : MonoBehaviour
             return false;
         }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.RightHand);
-        if (position.y >= -Mathf.Abs(position.x))
+
+        if (SteamVR_Input._default.inActions.Teleport.GetStateDown(SteamVR_Input_Sources.RightHand))
         {
-            down1 = false;
-            return false;
-        }
-        if (SteamVR_Input._default.inActions.Teleport.GetState(SteamVR_Input_Sources.RightHand))
-        {
-            if (!down1)
-            {
-                down1 = true;
-                return true;
-            }
-            else
+            if (position.y >= -Mathf.Abs(position.x))
             {
                 return false;
             }
+                return true;
         }
-        down1 = false;
         return false;
     }
     public static bool GetDownRight2()
@@ -153,24 +115,15 @@ public class ViveInput : MonoBehaviour
             return false;
         }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.LeftHand);
-        if (position.x <= Mathf.Abs(position.y))
+
+        if (SteamVR_Input._default.inActions.Teleport.GetStateDown(SteamVR_Input_Sources.LeftHand))
         {
-            right2 = false;
-            return false;
-        }
-        if (SteamVR_Input._default.inActions.Teleport.GetState(SteamVR_Input_Sources.LeftHand))
-        {
-            if (!right2)
-            {
-                right2 = true;
-                return true;
-            }
-            else
+            if (position.x <= Mathf.Abs(position.y))
             {
                 return false;
             }
+                return true;
         }
-        right2 = false;
         return false;
     }
     public static bool GetDownLeft2()
@@ -184,24 +137,15 @@ public class ViveInput : MonoBehaviour
             return false;
         }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.LeftHand);
-        if (position.x >= -Mathf.Abs(position.y))
+
+        if (SteamVR_Input._default.inActions.Teleport.GetStateDown(SteamVR_Input_Sources.LeftHand))
         {
-            left2 = false;
-            return false;
-        }
-        if (SteamVR_Input._default.inActions.Teleport.GetState(SteamVR_Input_Sources.LeftHand))
-        {
-            if (!left2)
-            {
-                left2 = true;
-                return true;
-            }
-            else
+            if (position.x >= -Mathf.Abs(position.y))
             {
                 return false;
             }
+                return true;
         }
-        left2 = false;
         return false;
     }
     public static bool GetDownUp2()
@@ -215,24 +159,15 @@ public class ViveInput : MonoBehaviour
             return false;
         }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.LeftHand);
-        if (position.y <= Mathf.Abs(position.x))
+
+        if (SteamVR_Input._default.inActions.Teleport.GetStateDown(SteamVR_Input_Sources.LeftHand))
         {
-            up2 = false;
-            return false;
-        }
-        if (SteamVR_Input._default.inActions.Teleport.GetState(SteamVR_Input_Sources.LeftHand))
-        {
-            if (!up2)
-            {
-                up2 = true;
-                return true;
-            }
-            else
+            if (position.y <= Mathf.Abs(position.x))
             {
                 return false;
             }
+                return true;
         }
-        up2 = false;
         return false;
     }
     public static bool GetDownDown2()
@@ -246,24 +181,15 @@ public class ViveInput : MonoBehaviour
             return false;
         }
         Vector2 position = SteamVR_Input._default.inActions.Move.GetAxis(SteamVR_Input_Sources.LeftHand);
-        if (position.y >= -Mathf.Abs(position.x))
+
+        if (SteamVR_Input._default.inActions.Teleport.GetStateDown(SteamVR_Input_Sources.LeftHand))
         {
-            down2 = false;
-            return false;
-        }
-        if (SteamVR_Input._default.inActions.Teleport.GetState(SteamVR_Input_Sources.LeftHand))
-        {
-            if (!down2)
-            {
-                down2 = true;
-                return true;
-            }
-            else
+            if (position.y >= -Mathf.Abs(position.x))
             {
                 return false;
             }
+                return true;
         }
-        down2 = false;
         return false;
     }
 }
