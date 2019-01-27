@@ -14,10 +14,16 @@ public class TitleManager : MonoBehaviour
 
 	private AudioSource m_TitleCall;
 
-	// Start is called before the first frame update
-	void Start()
+    // メンバ変数
+    private AudioSource m_BGM;
+
+    // Start is called before the first frame update
+    void Start()
     {
-		m_titleImage = transform.Find("Image").GetComponent<Image>();
+        // 初期化
+        m_BGM = this.transform.GetComponent<AudioSource>();
+
+        m_titleImage = transform.Find("Image").GetComponent<Image>();
 		m_touchText = transform.Find("Text").GetComponent<Text>();
 		m_colorTimer = 0;
 
@@ -52,14 +58,16 @@ public class TitleManager : MonoBehaviour
 		if (m_colorTimer > 3)
 		{
 			m_colorTimer = 0;
-		}
+        }
 
-		// タッチチェック
-		if (Input.anyKeyDown && !m_TitleCall.isPlaying)
-		{
-			Fader.FadeOut(1);
-		}
-
+        // タッチチェック
+        if (Input.anyKeyDown && !m_BGM.isPlaying)
+        {
+            if (!Fader.isFadeOut)
+            {
+                Fader.FadeOut(1);
+            }
+        }
 	}
 
 }

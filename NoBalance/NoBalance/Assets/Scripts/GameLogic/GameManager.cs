@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
 			m_BGMEnd = true;
 			m_BGM.Play();
 
-            _resultManager.StartResult(m_Clear, _Score, _HighScores);
+            _resultManager.StartResult(clear, _Score, _HighScores);
         }
 	}
 
