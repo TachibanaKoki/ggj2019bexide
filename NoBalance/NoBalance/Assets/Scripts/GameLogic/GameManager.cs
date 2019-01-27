@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
         _HighScores = PlayerPrefs.GetInt("HighScore",0);
         _scoreText.text = "SCORE:"+_Score;
 
+		// クリア、ゲームオーバーが行われたかどうかの判定
+		m_Clear = false;
 		var random = Random.Range(0, 100) % 3 + 1;
 		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
 		m_BGM.Play();
@@ -81,8 +83,15 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(bool clear)
     {
-        // tmp
-        Time.timeScale = 0.0f;
+
+		if(m_Clear)
+		{
+			return;
+		}
+
+		m_Clear = true;
+		// tmp
+		Time.timeScale = 0.0f;
 		if (_gameOverDemoTimer <= 0.0f)
 		{
 

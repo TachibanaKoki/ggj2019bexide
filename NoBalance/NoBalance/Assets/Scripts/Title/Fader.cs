@@ -12,7 +12,7 @@ public class Fader : MonoBehaviour
 	private static Image fadeImage;
 
 	//フェード用Imageの透明度
-	private static float alpha = 1.2f;
+	private static float alpha = 0f;
 
 	//フェードインアウトのフラグ
 	public static bool isFadeIn = false;
@@ -49,6 +49,7 @@ public class Fader : MonoBehaviour
 	public static void FadeIn()
 	{
 		if (fadeImage == null) Init();
+		alpha = 1.0f;
 		fadeImage.color = Color.black;
 		isFadeIn = true;
 	}
@@ -58,6 +59,7 @@ public class Fader : MonoBehaviour
 	{
 		if (fadeImage == null) Init();
 		nextScene = n;
+		alpha = 0f;
 		fadeImage.color = Color.clear;
 		fadeCanvas.enabled = true;
 		isFadeOut = true;
