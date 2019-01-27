@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
 		m_Clear = false;
 		m_BGMEnd = false;
-		var random = Random.Range(0, 100) % 3 + 1;
+		var random = Random.Range(0, 100) % 2 + 2;
 		m_BGM = GameObject.Find("BGM" + random).GetComponent<AudioSource>();
 		m_BGM.Play();
 

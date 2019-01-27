@@ -142,6 +142,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4958458205306009417}
     m_Modifications:
+    - target: {fileID: 8306121489473586388, guid: 583dab5fa7e41e041a9fd65208b49370,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6733533005205849917, guid: 583dab5fa7e41e041a9fd65208b49370,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -268,6 +273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733533005205849916, guid: 583dab5fa7e41e041a9fd65208b49370,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 583dab5fa7e41e041a9fd65208b49370, type: 3}
